@@ -5,25 +5,25 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="816.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ticket.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="421.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_film.FXMLDocumentController">
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <TextField fx:id="tfID" layoutX="93.0" layoutY="52.0" />
-      <TextField fx:id="tfTarif" layoutX="93.0" layoutY="108.0" />
-      <TextField fx:id="tfPlace" layoutX="93.0" layoutY="162.0" />
-      <TextField fx:id="tfSalle" layoutX="93.0" layoutY="217.0" />
-      <TextField fx:id="tfFilm" layoutX="93.0" layoutY="275.0" />
-      <TextField fx:id="tfPromo" layoutX="93.0" layoutY="332.0" />
-      <Label layoutX="22.0" layoutY="56.0" text="ID Ticket" />
-      <Label layoutX="22.0" layoutY="112.0" text="Tarif" />
-      <Label layoutX="22.0" layoutY="162.0" text="Nb Place" />
-      <Label layoutX="22.0" layoutY="221.0" text="Salle" />
-      <Label layoutX="22.0" layoutY="279.0" text="ID Film" />
-      <Label layoutX="22.0" layoutY="336.0" text="ID Promo" />
-      <Button fx:id="btnAjouter" layoutX="33.0" layoutY="382.0" mnemonicParsing="false" onAction="#AjouterTicket" text="Ajouter" />
-      <Button fx:id="btnModifier" layoutX="135.0" layoutY="382.0" mnemonicParsing="false" onAction="#ModifierTicket" text="Modifier" />
-      <Button fx:id="btnSupprimer" layoutX="242.0" layoutY="382.0" mnemonicParsing="false" onAction="#SupprimerTicket" text="Supprimer" />
-      <Label fx:id="Affiche" layoutX="413.0" layoutY="46.0" prefHeight="258.0" prefWidth="365.0" />
-      <Button fx:id="btnAfficher" layoutX="603.0" layoutY="376.0" mnemonicParsing="false" onAction="#AfficherTicket" text="Afficher" />
+      <TextField fx:id="tfcategorie" layoutX="108.0" layoutY="115.0" prefHeight="30.0" prefWidth="163.0" />
+      <TextField fx:id="tfnom" layoutX="108.0" layoutY="65.0" prefHeight="30.0" prefWidth="163.0" />
+      <TextField fx:id="tfduree" layoutX="108.0" layoutY="164.0" prefHeight="30.0" prefWidth="163.0" />
+      <TextField fx:id="tfphoto" layoutX="110.0" layoutY="214.0" prefHeight="30.0" prefWidth="163.0" />
+      <TextField fx:id="tfprix" layoutX="110.0" layoutY="264.0" prefHeight="30.0" prefWidth="163.0" />
+      <TextField fx:id="tfid" layoutX="108.0" layoutY="14.0" prefHeight="30.0" prefWidth="163.0" />
+      <Label layoutX="46.0" layoutY="19.0" text="Id" />
+      <Label layoutX="43.0" layoutY="70.0" text="Nom" />
+      <Label layoutX="29.0" layoutY="120.0" text="Catégorie" />
+      <Label layoutX="40.0" layoutY="169.0" text="Durée" />
+      <Label layoutX="41.0" layoutY="219.0" text="Photo" />
+      <Label layoutX="47.0" layoutY="269.0" text="Prix" />
+      <Button fx:id="btnajout" layoutX="27.0" layoutY="328.0" mnemonicParsing="false" onAction="#ajouterfilm" prefHeight="30.0" prefWidth="73.0" text="Ajouter" />
+      <Button fx:id="btnmod" layoutX="119.0" layoutY="328.0" mnemonicParsing="false" onAction="#modifierfilm" text="Modifier" />
+      <Button fx:id="btnafficher" layoutX="455.0" layoutY="328.0" mnemonicParsing="false" onAction="#afficherfilm" prefHeight="30.0" prefWidth="73.0" text="Afficher" />
+      <Label fx:id="affiche" layoutX="322.0" layoutY="24.0" prefHeight="289.0" prefWidth="354.0" />
+      <Button fx:id="btnsupprimer" layoutX="213.0" layoutY="328.0" mnemonicParsing="false" onAction="#supprimerfilm" text="Supprimer" />
     </children>
 </AnchorPane>
