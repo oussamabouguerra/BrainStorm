@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @author oussama
  */
 public class Maconnexion {
-    final static String URL="jdbc:mysql://127.0.0.1:3306/Aliment";
+    final static String URL="jdbc:mysql://127.0.0.1:3306/promotions";
 final static String LOGIN="root";
 final static String PWD="";
 static Maconnexion instance =null;

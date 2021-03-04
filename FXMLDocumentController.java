@@ -3,180 +3,133 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gestion_aliment;
+package gestion_film;
 
-import Entities.Aliment;
-import Service.ServiceAliment;
+import Entities.Promotion;
+import Service.ServicePromotion;
 import Utils.Maconnexion;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 
 /**
  *
- * @author 21624
+ * @author Med Aziz
  */
 public class FXMLDocumentController implements Initializable {
     
+    @FXML
     private Label label;
-    @FXML
-    private Button Btn_ajouter;
-    @FXML
-    private Button Btn_supprimer;
-    @FXML
-    private Button Btn_modifier;
-    private Label Affiche;
-    @FXML
-    private TextField tfid;
-    @FXML
-    private TextField tfmarque;
     @FXML
     private TextField tftype;
     @FXML
-    private TextField tfquantite;
+    private TextField tfnom;
     @FXML
-    private TextField tfprix;
+    private TextField tfdescription;
     @FXML
-    private TextField tfidp;
+    private TextField tfpourcentage;
     @FXML
-    private TableView<Aliment> table;
+    private TextField tfid;
     @FXML
-    private TableColumn<Aliment,Integer> id;
+    private Button btnajout;
     @FXML
-    private TableColumn<Aliment,Integer> quantite;
+    private Button btnmod;
     @FXML
-    private TableColumn<Aliment,Integer> prix;
+    private Button btnafficher;
     @FXML
-    private TableColumn<Aliment,Integer> idp;
+    private Label affiche;
     @FXML
-    private TableColumn<Aliment,Integer> type;
-    @FXML
-    private TableColumn<Aliment,Integer> marque;
-    @FXML
-    private ImageView imglogo;
+    private Button btnsupprimer;
     
     private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-       
+        
+        System.out.println("hello");
     }
-    ObservableList<Aliment> alimentsList = FXCollections.observableArrayList();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO  
-        
-          
-          try{
-          Connection cnx=Maconnexion.getInstance().getConnection();
-          String query = "SELECT * FROM aliment";
-          Statement st;
-          ResultSet rs;
-              st = cnx.createStatement();
-              rs = st.executeQuery(query);
-              Aliment aliment;
-              while(rs.next()){
-                  aliment = new Aliment(rs.getInt("id"),rs.getInt("quantite"),rs.getInt("prix"),rs.getInt("idpromo"),rs.getString("type"),rs.getString("marque"));
-                 alimentsList.add(aliment);
-              }
-              
-          }catch (Exception ex){
-            ex.printStackTrace();
-            System.out.println("Error on Building Data");
-          }
-      id.setCellValueFactory(new PropertyValueFactory<>("id"));
-      quantite.setCellValueFactory(new PropertyValueFactory<>("quantite"));
-      prix.setCellValueFactory(new PropertyValueFactory<>("prix"));
-      idp.setCellValueFactory(new PropertyValueFactory<>("idpromo"));
-      type.setCellValueFactory(new PropertyValueFactory<>("type"));
-      marque.setCellValueFactory(new PropertyValueFactory<>("marque")); 
-      
-      table.setItems(alimentsList);
-        
+        // TODO
     }    
-    
-    
 
-    @FXML
-    private void ajouter_aliment(ActionEvent event) {
-        ServiceAliment aa=new ServiceAliment();
-     Aliment a=new Aliment();
-     a.setId(Integer.parseInt(tfid.getText()));
-     a.setQuantite(Integer.parseInt(tfquantite.getText()));
-     a.setPrix(Integer.parseInt(tfprix.getText()));
-     a.setIdpromo(Integer.parseInt(tfidp.getText()));
-     a.setType(tftype.getText());
-     a.setMarque(tfmarque.getText());
-try{
-     
-aa.AddAliment(a);
-    } catch(SQLException ex){
-   
-    }
-    }
-
-    @FXML
-    private void supprimer_aliment(ActionEvent event) {
-        ServiceAliment st=new ServiceAliment();
-       Aliment a=new Aliment();
-       a.setId(Integer.parseInt(tfid.getText()));
-       st.supprimerAliment(a);
-    }
-
-    @FXML
-    private void modifier_aliment(ActionEvent event)throws SQLException {
-         ServiceAliment sr=new ServiceAliment();
-        Aliment a=new Aliment();
-        int id;
-        id=Integer.parseInt(tfid.getText());
-        a.setQuantite(Integer.parseInt(tfquantite.getText()));
-        a.setPrix(Integer.parseInt(tfprix.getText()));
-         a.setIdpromo(Integer.parseInt(tfidp.getText()));
-         a.setType(tftype.getText());
-        a.setMarque(tfmarque.getText());
-       
-        sr.ModifierAliment(id,a);
+   @FXML
+    private void ajouterpromotion(ActionEvent event) {
+         ServicePromotion ff=new ServicePromotion();
+          Promotion f=new Promotion();
+         f.setId(Integer.parseInt(tfid.getText()));
+         f.setNom(tfnom.getText());
+         f.setType(tftype.getText());
+         f.setDescription(tfdescription.getText());
+         f.setPourcentage(tfpourcentage.getText());
+         
+         
+        try {
+            ff.AddPromotion(f);
+        } catch (SQLException ex) {
+        }
+        
         
     }
+    
+    
 
-    private void afficher_aliment(ActionEvent event) {
-        ServiceAliment  aa=new ServiceAliment();
-            Aliment a =new Aliment();
+
+    @FXML
+    private void afficherpromotion(ActionEvent event) {
+        ServicePromotion ff =new ServicePromotion();
+        int id=Integer.parseInt(tfid.getText()) ;
+            Promotion f =new Promotion();
         try {
             
-            System.out.println(aa.afficherAliment().toString());
-            Affiche.setText(aa.afficherAliment().toString());
+            System.out.println(ff.AfficherPromotion(id).toString());
+            affiche.setText(ff.AfficherPromotion(id).toString());
         } catch (SQLException ex) {
             System.out.println(ex);
         }
     }
 
-    private String String(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private Connection getConnection() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   @FXML
+    private void modifierpromotion(ActionEvent event) { //problem
+        ServicePromotion pr=new ServicePromotion();
+        Promotion p=new Promotion();
+        int id;
+        id=Integer.parseInt(tfid.getText());
+        p.setNom(tfnom.getText());
+//        r.setIdTicket(Integer.parseInt(cbIdTicket.getValue()));  //error
+//        r.setIdAlim(Integer.parseInt(cbIdAliment.getValue()));    //erro
+        p.setType(tftype.getText());
+        p.setDescription(tfdescription.getText());
+        p.setPourcentage(tfpourcentage.getText());
+        
+       
+       
+         try {
+            pr. modifierpromotion(id, p);
+        } catch (Exception e) {
+            System.out.println("Pas de modification!");
+       }
+       
     }
 
     @FXML
-    private void handlelogoimg(MouseEvent event) {
-       label.setText("");
+    private void supprimerpromotion(ActionEvent event) {
+         ServicePromotion pr=new ServicePromotion();
+         Promotion p=new Promotion() ;
+         p.setId(Integer.parseInt(tfid.getText())) ;
+         pr.supprimerpromotion(p);
+         
+        
+        
+        
     }
+
     
 }
