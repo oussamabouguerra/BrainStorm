@@ -1,27 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="421.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_film.FXMLDocumentController">
-    <children>
-        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <TextField fx:id="tftype" layoutX="143.0" layoutY="115.0" prefHeight="30.0" prefWidth="163.0" />
-      <TextField fx:id="tfnom" layoutX="108.0" layoutY="65.0" prefHeight="30.0" prefWidth="163.0" />
-      <TextField fx:id="tfdescription" layoutX="146.0" layoutY="164.0" prefHeight="30.0" prefWidth="163.0" />
-      <TextField fx:id="tfpourcentage" layoutX="143.0" layoutY="214.0" prefHeight="30.0" prefWidth="163.0" />
-      <TextField fx:id="tfid" layoutX="108.0" layoutY="14.0" prefHeight="30.0" prefWidth="163.0" />
-      <Label layoutX="46.0" layoutY="19.0" text="Id" />
-      <Label layoutX="43.0" layoutY="70.0" text="Nom" />
-      <Label layoutX="29.0" layoutY="120.0" text="Type" />
-      <Label layoutX="40.0" layoutY="169.0" text="Description" />
-      <Label layoutX="41.0" layoutY="219.0" text="Pourcentage" />
-      <Button fx:id="btnajout" layoutX="27.0" layoutY="328.0" mnemonicParsing="false" onAction="#ajouterpromotion" prefHeight="30.0" prefWidth="73.0" text="Ajouter" />
-      <Button fx:id="btnmod" layoutX="119.0" layoutY="328.0" mnemonicParsing="false" onAction="#modifierpromotion" text="Modifier" />
-      <Button fx:id="btnafficher" layoutX="455.0" layoutY="328.0" mnemonicParsing="false" onAction="#afficherpromotion" prefHeight="30.0" prefWidth="73.0" text="Afficher" />
-      <Label fx:id="affiche" layoutX="322.0" layoutY="24.0" prefHeight="289.0" prefWidth="354.0" />
-      <Button fx:id="btnsupprimer" layoutX="213.0" layoutY="328.0" mnemonicParsing="false" onAction="#supprimerpromotion" text="Supprimer" />
-    </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineapp.FXMLDocumentController">
+   <children>
+      <AnchorPane fx:id="paneLogin" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <TextField fx:id="tfUsernameLogin" layoutX="77.0" layoutY="202.0" prefHeight="40.0" prefWidth="450.0" promptText="Username" />
+            <PasswordField fx:id="tfPasswordLogin" layoutX="77.0" layoutY="269.0" prefHeight="40.0" prefWidth="450.0" promptText="Password" />
+            <ComboBox fx:id="cbxTypeLogin" layoutX="377.0" layoutY="142.0" prefWidth="150.0" promptText="Chose type" />
+            <Button fx:id="btLogin" layoutX="74.0" layoutY="334.0" mnemonicParsing="false" onAction="#login" prefHeight="37.0" prefWidth="222.0" style="-fx-background-color: #f7c139;" text="Login" textFill="WHITE">
+               <font>
+                  <Font name="Times New Roman Bold" size="20.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="77.0" fitWidth="436.0" layoutX="77.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@cinejamil-tunisie.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="305.0" layoutY="334.0" mnemonicParsing="false" onAction="#paneSignUpShow" prefHeight="37.0" prefWidth="222.0" style="-fx-background-color: #f7c139;" text="SignUp" textFill="WHITE">
+               <font>
+                  <Font name="Times New Roman Bold" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneSignUp" layoutX="14.0" layoutY="175.0" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <ComboBox fx:id="cbxTypeSignUp" layoutX="14.0" layoutY="86.0" prefHeight="40.0" prefWidth="300.0" promptText="Chose Type" />
+            <TextField fx:id="tfUsernameSignUp" layoutX="14.0" layoutY="147.0" prefHeight="40.0" prefWidth="300.0" promptText="Enter Username" />
+            <TextField fx:id="tfFamilynameSignup" layoutX="14.0" layoutY="198.0" prefHeight="40.0" prefWidth="300.0" promptText="Enter Familyname" />
+            <TextField fx:id="tfCinSignUp" layoutX="14.0" layoutY="250.0" prefHeight="40.0" prefWidth="300.0" promptText="Enter CIN" />
+            <TextField fx:id="tfMailSignUp" layoutX="14.0" layoutY="308.0" prefHeight="40.0" prefWidth="300.0" promptText="Enter Mail" />
+            <Button fx:id="btSignUp" layoutX="362.0" layoutY="364.0" mnemonicParsing="false" onAction="#SignUp" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #f7c139;" text="SignUp" textFill="WHITE">
+               <font>
+                  <Font name="Times New Roman Bold" size="20.0" />
+               </font>
+            </Button>
+            <PasswordField fx:id="tfPasswordSignUp" layoutX="14.0" layoutY="364.0" prefHeight="40.0" prefWidth="300.0" promptText="Enter Password" />
+            <ImageView fitHeight="183.0" fitWidth="183.0" layoutX="371.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@avat.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#paneLoginShow" text="Back" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneReservation" layoutX="8.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button layoutX="100.0" layoutY="124.0" mnemonicParsing="false" onAction="#paneAjouterResShow" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #f7c139;" text="Créer Réservation" textFill="WHITE">
+               <font>
+                  <Font name="Times New Roman Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="100.0" layoutY="188.0" mnemonicParsing="false" onAction="#paneModifierResShow" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #f7c139;" text="Modifier Réservation" textFill="WHITE">
+               <font>
+                  <Font name="Times New Roman Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="100.0" layoutY="260.0" mnemonicParsing="false" onAction="#paneSuppResShow" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #f7c139;" text="Annuler Réservation" textFill="WHITE">
+               <font>
+                  <Font name="Times New Roman Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btAfficherRes" layoutX="100.0" layoutY="327.0" mnemonicParsing="false" onAction="#afficherRes" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #f7c139;" text="Afficher Réservations" textFill="WHITE">
+               <font>
+                  <Font name="Times New Roman Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#paneLoginShow" text="Exit" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneAjouterRes" layoutX="172.0" layoutY="73.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ComboBox fx:id="cbxTicketAjouterRes" layoutX="100.0" layoutY="130.0" prefHeight="40.0" prefWidth="400.0" promptText="ID Ticket" />
+            <ComboBox fx:id="cbxAlimAjouterRes" layoutX="100.0" layoutY="202.0" prefHeight="40.0" prefWidth="400.0" promptText="ID Alim" />
+            <Button fx:id="btAjouterRes" layoutX="100.0" layoutY="325.0" mnemonicParsing="false" onAction="#ajouterRes" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #f7c139;" text="Confirmer" textFill="WHITE">
+               <font>
+                  <Font name="Times New Roman Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#paneReservationShow" text="Back" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneModifierRes" layoutX="89.0" layoutY="50.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ComboBox fx:id="cbxTicketModifierRes" layoutX="89.0" layoutY="177.0" prefHeight="40.0" prefWidth="400.0" promptText="ID Ticket" />
+            <ComboBox fx:id="cbxAlimModifierRes" layoutX="89.0" layoutY="250.0" prefHeight="40.0" prefWidth="400.0" promptText="ID Alim" />
+            <Button fx:id="btModifierRes" layoutX="89.0" layoutY="348.0" mnemonicParsing="false" onAction="#modifierRes" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #f7c139;" text="Confirmer" textFill="WHITE">
+               <font>
+                  <Font name="Times New Roman Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#paneReservationShow" text="Back" />
+            <TextField fx:id="tfIdResModifierRes" layoutX="89.0" layoutY="106.0" prefHeight="40.0" prefWidth="400.0" promptText="ID Réservation" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneSuppRes" layoutX="14.0" layoutY="35.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="btSupprimerRes" layoutX="90.0" layoutY="263.0" mnemonicParsing="false" onAction="#supprimerRes" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #f7c139;" text="Confirmer" textFill="WHITE">
+               <font>
+                  <Font name="Times New Roman Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#paneReservationShow" text="Back" />
+            <TextField fx:id="tfIdResSupprimerRes" layoutX="90.0" layoutY="198.0" prefHeight="40.0" prefWidth="400.0" promptText="ID Réservation" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneAfficherRes" layoutX="24.0" layoutY="45.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#paneReservationShow" text="Back" />
+            <Label fx:id="labelAfficherRes" layoutX="29.0" layoutY="57.0" prefHeight="338.0" prefWidth="533.0" />
+            <Button fx:id="btImprimer" layoutX="96.0" layoutY="419.0" mnemonicParsing="false" onAction="#imprimerRes" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #f7c139;" text="Imprimer" textFill="WHITE">
+               <font>
+                  <Font name="Times New Roman Bold" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>

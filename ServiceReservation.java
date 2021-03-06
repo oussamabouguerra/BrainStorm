@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mail.Mailling;
 
 /**
  *
@@ -24,6 +25,7 @@ import java.util.logging.Logger;
  */
 public class ServiceReservation implements IserviceReservation{
     
+      
     Connection cnx;
     private List<Reservation> reservations;
 
@@ -70,6 +72,7 @@ public class ServiceReservation implements IserviceReservation{
         Reservation r=new Reservation();
         
         while(res2.next()){
+          
             r.setIdRes(res2.getInt("idRes"));
             r.setIdUser(res2.getInt("idUser"));
             r.setIdTicket(res2.getInt("idTicket"));
@@ -79,6 +82,9 @@ public class ServiceReservation implements IserviceReservation{
             r.setHeure(res2.getString("heure"));
             
             res.add(r);
+            r=new Reservation();
+            
+            
             
         }
         return res;
@@ -128,6 +134,15 @@ public class ServiceReservation implements IserviceReservation{
             System.out.println(e.getMessage());
         }
             
+    }
+
+    @Override
+    public void mail() {
+        try {
+            Mailling.sendMail("mouadh.belgaied@esprit.tn");
+        } catch (Exception ex) {
+            Logger.getLogger(ServiceReservation.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     

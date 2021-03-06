@@ -7,18 +7,13 @@ package Utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author mouad
  */
 public class Maconnexion {
-    
     final static String URL="jdbc:mysql://127.0.0.1:3306/cine";
     final static String LOGIN="root";
     final static String PWD="";
