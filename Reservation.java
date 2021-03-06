@@ -10,6 +10,7 @@ package Entities;
  * @author mouad
  */
 public class Reservation {
+    
     private int idRes,idUser,idTicket,idAlim;
     private float prix;
     private String date,heure;
@@ -75,7 +76,7 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "Reservation{" + "idRes=" + idRes + ", idUser=" + idUser + ", idTicket=" + idTicket + ", idAlim=" + idAlim + ", prix=" + prix + ", date=" + date + ", \n heure=" + heure +"\n"+ '}';
+        return "Reservation{" + "idRes=" + idRes + ", idUser=" + idUser + ", idTicket=" + idTicket + ", idAlim=" + idAlim + ", prix=" + prix + ", \n date=" + date + ", heure=" + heure +"\n"+ '}';
     }
     
     
