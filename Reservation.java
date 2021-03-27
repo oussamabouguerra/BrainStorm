@@ -15,6 +15,18 @@ public class Reservation {
     private float prix;
     private String date,heure;
 
+    public Reservation(int idRes, int idUser, int idTicket, int idAlim, float prix, String date, String heure) {
+        this.idRes = idRes;
+        this.idUser = idUser;
+        this.idTicket = idTicket;
+        this.idAlim = idAlim;
+        this.prix = prix;
+        this.date = date;
+        this.heure = heure;
+    }
+    
+    
+    
     public Reservation() {
     }
 

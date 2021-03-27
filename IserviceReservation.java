@@ -20,6 +20,6 @@ public interface IserviceReservation {
     public List<Reservation> AfficherReservation(int id) throws SQLException;
     public void SuppReservation(Reservation R) ;
     public void ModifierReservation(int id,Reservation R);
-    public void mail();
+    public void mail(String mail);
     
 }

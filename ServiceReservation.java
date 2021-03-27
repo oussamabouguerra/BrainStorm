@@ -76,7 +76,7 @@ public class ServiceReservation implements IserviceReservation{
             r.setIdRes(res2.getInt("idRes"));
             r.setIdUser(res2.getInt("idUser"));
             r.setIdTicket(res2.getInt("idTicket"));
-            r.setIdAlim(res2.getInt("idAlim"));
+            r.setIdAlim(res2.getInt("idAlim")); // à remplacer par la marque de l'alim
             r.setPrix(res2.getFloat("prix"));
             r.setDate(res2.getString("date"));
             r.setHeure(res2.getString("heure"));
@@ -137,9 +137,9 @@ public class ServiceReservation implements IserviceReservation{
     }
 
     @Override
-    public void mail() {
+    public void mail(String mail) {
         try {
-            Mailling.sendMail("mouadh.belgaied@esprit.tn");
+            Mailling.sendMail(mail);
         } catch (Exception ex) {
             Logger.getLogger(ServiceReservation.class.getName()).log(Level.SEVERE, null, ex);
         }
