@@ -5,6 +5,8 @@
  */
 package Entities;
 
+import javafx.scene.image.ImageView;
+
 /**
  *
  * @author 21624
@@ -12,9 +14,10 @@ package Entities;
 
 public class Aliment {
 int id,quantite,prix,idpromo;
-String type,marque;
+String type,marque,photo;
+ImageView photos;
 
-    public Aliment(int id, int quantite, int prix, int idpromo, String type, String marque) {
+    public Aliment(int id, int quantite, int prix, int idpromo, String type, String marque,String photo) {
         this.id = id;
         this.quantite = quantite;
         this.prix = prix;
@@ -22,10 +25,45 @@ String type,marque;
         this.type = type;
         this.marque = marque;
     }
+ public Aliment(String photo) {
+        this.photo=photo;
+     }
+    public Aliment( int quantite, int prix, int idpromo, String type, String marque, String photo) {
+        this.id = id;
+        this.quantite = quantite;
+        this.prix = prix;
+        this.idpromo = idpromo;
+        this.type = type;
+        this.marque = marque;
+        this.photo = photo;
+    }
 
+    
 
     public Aliment() {
+        
     }
+
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public ImageView getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(ImageView photos) {
+        this.photos = photos;
+    }
+
+   
+
+   
 
     public int getId() {
         return id;
@@ -75,10 +113,15 @@ String type,marque;
         this.marque = marque;
     }
 
-    
-@Override
+    @Override
     public String toString() {
-        return "aliment{" + "id=" + id + ", quantite=" + quantite + ", prix=" + prix + ", idpromo=" + idpromo + ", type=" + type + ", marque=" + marque + '}';
+        return "Aliment{" + "id=" + id + ", quantite=" + quantite + ", prix=" + prix + ", idpromo=" + idpromo + ", type=" + type + ", marque=" + marque + ", photos=" + photos + '}';
     }
+
+    /*public void setPhoto(ImageView imgView) {
+       this.photos=photos;
+    }*/
+
+    
 
 }

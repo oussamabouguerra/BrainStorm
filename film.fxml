@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="1165.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FilmController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="704.0" prefWidth="1170.0" styleClass="primary_color" stylesheets="@style.css">
+         <left>
+            <VBox prefHeight="806.0" prefWidth="245.0" spacing="20.0" styleClass="secondary-color" stylesheets="@style.css" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="61.0" fitWidth="202.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../image/Capture1-removebg-preview.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <VBox prefHeight="182.0" prefWidth="235.0" spacing="10.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0" styleClass="selected" stylesheets="@../../../JavaFXApplication34/src/Spotify-Design-main/Spotify/out/production/Spotify/css/style.css">
+                           <children>
+                              <ImageView fitHeight="36.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/unnamed.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="btnhome" mnemonicParsing="false" prefHeight="51.0" prefWidth="149.0" styleClass="upgrade-button" stylesheets="@style.css" text="Home">
+                                 <font>
+                                    <Font name="Gabriola" size="25.0" />
+                                 </font>
+                                 <textFill>
+                                    <LinearGradient endX="1.0" endY="1.0" proportional="false" startY="1.0">
+                                       <stops>
+                                          <Stop>
+                                             <color>
+                                                <Color red="1.0" green="0.06759259104728699" blue="0.018518518656492233" />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="1.0">
+                                             <color>
+                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                             </color>
+                                          </Stop>
+                                       </stops>
+                                    </LinearGradient>
+                                 </textFill>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <Separator prefWidth="200.0" />
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="12.0" prefWidth="235.0" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <VBox prefHeight="763.0" prefWidth="990.0" spacing="20.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="707.0" fitWidth="925.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../image/cinema-neon-sign_110464-145.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+      <AnchorPane fx:id="panek" layoutX="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0" prefWidth="1165.0">
+         <children>
+            <AnchorPane id="AnchorPane" fx:id="paneTicket" layoutX="1.0" prefHeight="704.0" prefWidth="1176.0">
+               <children>
+                  <VBox focusTraversable="true" layoutX="262.0" layoutY="47.0" prefHeight="413.0" prefWidth="887.0" styleClass="secondary-color" stylesheets="@style.css">
+                     <children>
+                        <ScrollPane fx:id="scroll" prefHeight="421.0" prefWidth="887.0" stylesheets="@style.css" vbarPolicy="NEVER">
+                           <content>
+                              <GridPane fx:id="grid" alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="0.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints />
+                                    <ColumnConstraints />
+                                    <ColumnConstraints maxWidth="5.0" minWidth="0.0" prefWidth="0.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints />
+                                 </rowConstraints>
+                              </GridPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
+                  <ImageView fitHeight="65.0" fitWidth="44.0" layoutX="14.0" layoutY="366.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/618c2fe254b3701f1021ef2cf677eda6-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="78.0" fitWidth="97.0" layoutX="-2.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/contact-question-icon-elements-professional-seo-neon-style-icons-simple-websites-web-design-mobile-app-info-graphics-188758159-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="44.0" layoutX="15.0" layoutY="425.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/acf08b5154e52015de3f4a58876855c7-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="44.0" layoutX="15.0" layoutY="488.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/1a35bb5cdd8e4d69e548029910e2a266.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="fb" layoutX="77.0" layoutY="495.0" mnemonicParsing="false" onAction="#facebookload" prefHeight="33.0" prefWidth="118.0" styleClass="upgrade-button" stylesheets="@style.css" text="Facebook">
+                     <font>
+                        <Font name="Gabriola" size="18.0" />
+                     </font>
+                     <textFill>
+                        <RadialGradient centerY="1.0" proportional="false" radius="0.5">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" green="0.06759259104728699" blue="0.018518518656492233" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                  </Button>
+                  <Button fx:id="insta" layoutX="76.0" layoutY="429.0" mnemonicParsing="false" onAction="#instaload" prefHeight="33.0" prefWidth="118.0" styleClass="upgrade-button" stylesheets="@style.css" text="Intagram">
+                     <font>
+                        <Font name="Gabriola" size="18.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0" proportional="false" startY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" green="0.06759259104728699" blue="0.018518518656492233" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Button>
+                  <Separator layoutX="17.0" layoutY="485.0" prefWidth="200.0" />
+                  <Separator layoutX="16.0" layoutY="419.0" prefWidth="200.0" />
+                  <Separator layoutX="16.0" layoutY="363.0" prefWidth="200.0" />
+                  <Button fx:id="btnalimentShow" layoutX="69.0" layoutY="249.0" mnemonicParsing="false" onAction="#aimentShow" prefHeight="51.0" prefWidth="156.0" styleClass="upgrade-button" stylesheets="@style.css" text="Aliments">
+                     <font>
+                        <Font name="Gabriola" size="25.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="0.9666666666666667" proportional="false" startX="1.0" startY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" green="0.06759259104728699" blue="0.018518518656492233" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Button>
+                  <ImageView fitHeight="36.0" fitWidth="48.0" layoutX="18.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/e6f4a3f7bd281d7ee0e282822fc3ed71-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnhome1" layoutX="73.0" layoutY="177.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="149.0" styleClass="upgrade-button" stylesheets="@style.css" text="Movies">
+                     <font>
+                        <Font name="Gabriola" size="25.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="0.9095238095238095" endY="1.0" proportional="false" startY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" green="0.06759259104728699" blue="0.018518518656492233" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Button>
+                  <ImageView fitHeight="41.0" fitWidth="70.0" layoutX="16.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/276aa07c8b38655d18a0c3dacb1e18d6-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <Separator layoutX="16.0" layoutY="238.0" prefWidth="200.0" />
+                  <Label layoutX="20.0" layoutY="319.0" prefHeight="135.0" prefWidth="231.0" text="          +21624162298">
+                     <font>
+                        <Font name="Gabriola" size="33.0" />
+                     </font>
+                     <textFill>
+                        <RadialGradient centerX="0.4833333333333334" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" green="0.06759259104728699" blue="0.018518518656492233" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                  </Label>
+                  <Label fx:id="labelcontact" layoutX="9.0" layoutY="298.0" prefHeight="65.0" prefWidth="222.0" text="               Contact Us">
+                     <font>
+                        <Font name="Gabriola" size="33.0" />
+                     </font>
+                     <textFill>
+                        <RadialGradient centerX="0.4833333333333334" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" green="0.06759259104728699" blue="0.018518518656492233" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                  </Label>
+                  <Separator layoutX="12.0" layoutY="309.0" prefWidth="200.0" />
+                  <ButtonBar layoutX="231.0" prefHeight="40.0" prefWidth="200.0" />
+                  <Label fx:id="choselangue" layoutX="782.0" layoutY="12.0" prefHeight="17.0" prefWidth="103.0" text="Choose Language" textFill="#fffbfb" />
+                  <ImageView fitHeight="40.0" fitWidth="41.0" layoutX="891.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/31s65UrXsZL._AC_SX425_.jpg" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnTn" layoutX="895.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnlantn" styleClass="transparent" stylesheets="@style_1.css" />
+                  <ImageView fitHeight="40.0" fitWidth="41.0" layoutX="940.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/1200px-Flag_of_France.svg.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="41.0" layoutX="994.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/grande_bretagne_1606.gif" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btneng" layoutX="994.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnlaneng" prefHeight="25.0" prefWidth="41.0" styleClass="transparent" stylesheets="@style_1.css" />
+                  <Button fx:id="btnfr" layoutX="940.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnlanfr" prefHeight="25.0" prefWidth="41.0" styleClass="transparent" stylesheets="@style_1.css" text=" " />
+                  <Button fx:id="btnToWatch" layoutX="10.0" layoutY="574.0" mnemonicParsing="false" onAction="#handlebtnToWatch" prefHeight="36.0" prefWidth="214.0" styleClass="chosen-fruit-card" stylesheets="@style_1.css" text="Top 10 Movies To Watch" textFill="#f2eded">
+                     <font>
+                        <Font name="Gabriola" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnToWatch1" layoutX="9.0" layoutY="574.0" mnemonicParsing="false" onAction="#handlebtnToWatch" prefHeight="36.0" prefWidth="214.0" styleClass="chosen-fruit-card" stylesheets="@style_1.css" text="Top 10 Movies To Watch" textFill="#f2eded">
+                     <font>
+                        <Font name="Gabriola" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="fb1" layoutX="76.0" layoutY="495.0" mnemonicParsing="false" onAction="#facebookload" prefHeight="33.0" prefWidth="118.0" styleClass="upgrade-button" stylesheets="@style.css" text="Facebook">
+                     <font>
+                        <Font name="Gabriola" size="18.0" />
+                     </font>
+                     <textFill>
+                        <RadialGradient centerY="1.0" proportional="false" radius="0.5">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" green="0.06759259104728699" blue="0.018518518656492233" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane id="AnchorPane" fx:id="paneAliments" layoutX="-6.0" layoutY="-1.0" prefHeight="715.0" prefWidth="1176.0" visible="false">
+         <children>
+            <VBox focusTraversable="true" layoutX="261.0" layoutY="34.0" prefHeight="413.0" prefWidth="887.0" styleClass="secondary-color" stylesheets="@style.css" visible="false">
+               <children>
+                  <ScrollPane fx:id="scroll1" prefHeight="418.0" prefWidth="887.0" stylesheets="@style.css" vbarPolicy="NEVER">
+                     <content>
+                        <GridPane fx:id="grid1" alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="0.0">
+                           <columnConstraints>
+                              <ColumnConstraints />
+                              <ColumnConstraints />
+                              <ColumnConstraints maxWidth="5.0" minWidth="0.0" prefWidth="0.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints />
+                           </rowConstraints>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

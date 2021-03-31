@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gestion_aliment;
-
-import java.net.URL;
+package ticket;
+  import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
+/**
+ *
+ * @author oussama
+ */
+  
 /**
  *
  * @author 21624
@@ -19,5 +23,8 @@ public class tableController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+ 
     
 }
+

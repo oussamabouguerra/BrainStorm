@@ -2,255 +2,163 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.SepiaTone?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineapp.FXMLDocumentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ticket.FXMLDocumentController">
    <children>
-      <AnchorPane fx:id="paneLogin" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <AnchorPane fx:id="paneLogin" prefHeight="489.0" prefWidth="710.0" visible="false">
          <children>
-            <TextField fx:id="tfUsernameLogin" layoutX="77.0" layoutY="202.0" prefHeight="40.0" prefWidth="450.0" promptText="CIN" />
-            <PasswordField fx:id="tfPasswordLogin" layoutX="77.0" layoutY="269.0" prefHeight="40.0" prefWidth="450.0" promptText="Password" />
-            <ComboBox fx:id="cbxTypeLogin" layoutX="377.0" layoutY="142.0" prefWidth="150.0" promptText="Chose type" />
-            <Button fx:id="btLogin" layoutX="74.0" layoutY="334.0" mnemonicParsing="false" onAction="#login" prefHeight="37.0" prefWidth="222.0" style="-fx-background-color: #f7c139;" text="Login" textFill="WHITE">
-               <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="77.0" fitWidth="436.0" layoutX="77.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="490.0" fitWidth="673.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@cinejamil-tunisie.png" />
+                  <Image url="@../image/backg.png" />
                </image>
             </ImageView>
-            <Button layoutX="305.0" layoutY="334.0" mnemonicParsing="false" onAction="#paneSignUpShow" prefHeight="37.0" prefWidth="222.0" style="-fx-background-color: #f7c139;" text="SignUp" textFill="WHITE">
+            <TextField fx:id="tfusername" layoutX="166.0" layoutY="110.0" prefHeight="53.0" prefWidth="359.0" promptText="CIN" />
+            <TextField fx:id="tfmdp" layoutX="166.0" layoutY="220.0" prefHeight="53.0" prefWidth="359.0" promptText="MDP" />
+            <Button fx:id="btnlogin" layoutX="166.0" layoutY="325.0" mnemonicParsing="false" onAction="#login" prefHeight="47.0" prefWidth="149.0" style="-fx-background-color: #000000;" text="Login" textFill="#f8f6f6">
                <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
+                  <Font name="Franklin Gothic Medium" size="22.0" />
                </font>
             </Button>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="paneSignUp" layoutX="14.0" layoutY="175.0" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <children>
-            <ComboBox fx:id="cbxTypeSignUp" layoutX="14.0" layoutY="86.0" prefHeight="40.0" prefWidth="300.0" promptText="Chose Type" />
-            <TextField fx:id="tfUsernameSignUp" layoutX="14.0" layoutY="147.0" prefHeight="40.0" prefWidth="300.0" promptText="Enter Username" />
-            <TextField fx:id="tfFamilynameSignup" layoutX="14.0" layoutY="198.0" prefHeight="40.0" prefWidth="300.0" promptText="Enter Familyname" />
-            <TextField fx:id="tfCinSignUp" layoutX="14.0" layoutY="250.0" prefHeight="40.0" prefWidth="300.0" promptText="Enter CIN" />
-            <TextField fx:id="tfMailSignUp" layoutX="14.0" layoutY="308.0" prefHeight="40.0" prefWidth="300.0" promptText="Enter Mail" />
-            <Button fx:id="btSignUp" layoutX="362.0" layoutY="364.0" mnemonicParsing="false" onAction="#SignUp" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #f7c139;" text="SignUp" textFill="WHITE">
+            <Button fx:id="tfsignup" layoutX="376.0" layoutY="325.0" mnemonicParsing="false" onAction="#paneSignUpShow" prefHeight="47.0" prefWidth="149.0" style="-fx-background-color: #000000;" text="SignUp" textFill="WHITE">
                <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
+                  <Font name="Franklin Gothic Medium" size="22.0" />
                </font>
             </Button>
-            <PasswordField fx:id="tfPasswordSignUp" layoutX="14.0" layoutY="364.0" prefHeight="40.0" prefWidth="300.0" promptText="Enter Password" />
-            <ImageView fitHeight="183.0" fitWidth="183.0" layoutX="371.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+            <ComboBox fx:id="cbxctype" layoutX="489.0" layoutY="49.0" prefWidth="150.0" promptText="Chose Type" style="-fx-background-color: #FBE5CD;" />
+            <ImageView fitHeight="122.0" fitWidth="179.0" layoutX="407.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@avat.png" />
+                  <Image url="@../image/background-removebg-preview.png" />
                </image>
             </ImageView>
-            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#paneLoginShow" text="Back" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="paneReservation" layoutX="8.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="paneSignUp" prefHeight="490.0" prefWidth="409.0" visible="false">
          <children>
-            <ImageView fitHeight="500.0" fitWidth="600.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="16.20001220703125" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="17.0">
+            <ImageView fitHeight="490.0" fitWidth="710.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@backg.png" />
+                  <Image url="@../image/backg.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="258.0" fitWidth="311.0" layoutX="268.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
+            <ComboBox fx:id="cbxtup" layoutX="208.0" layoutY="33.0" prefHeight="41.0" prefWidth="239.0" promptText="Chose Type" style="-fx-background-color: #FBE5CD;" />
+            <TextField layoutX="208.0" layoutY="95.0" prefHeight="41.0" prefWidth="239.0" promptText="Enter Username" />
+            <TextField layoutX="208.0" layoutY="159.0" prefHeight="41.0" prefWidth="239.0" promptText="Enter Familyname" />
+            <TextField layoutX="208.0" layoutY="220.0" prefHeight="41.0" prefWidth="239.0" promptText="Enter CIN" />
+            <TextField layoutX="208.0" layoutY="284.0" prefHeight="41.0" prefWidth="239.0" promptText="Enter Mail" />
+            <TextField layoutX="208.0" layoutY="349.0" prefHeight="41.0" prefWidth="239.0" promptText="Enter Password" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="462.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@background-removebg-preview.png" />
+                  <Image url="@../image/background-removebg-preview.png" />
                </image>
             </ImageView>
-            <Button layoutX="256.0" layoutY="28.0" mnemonicParsing="false" onAction="#paneAjouterResShow" prefHeight="50.0" prefWidth="335.0" style="-fx-background-color: #f7c139;" text="Créer Réservation">
-               <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button layoutX="256.0" layoutY="84.0" mnemonicParsing="false" onAction="#paneModifierResShow" prefHeight="50.0" prefWidth="335.0" style="-fx-background-color: #f7c139;" text="Modifier Réservation">
-               <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button layoutX="256.0" layoutY="140.0" mnemonicParsing="false" onAction="#paneSuppResShow" prefHeight="50.0" prefWidth="335.0" style="-fx-background-color: #f7c139;" text="Annuler Réservation">
-               <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="btAfficherRes" layoutX="256.0" layoutY="196.0" mnemonicParsing="false" onAction="#afficherRes" prefHeight="50.0" prefWidth="335.0" style="-fx-background-color: #f7c139;" text="Afficher Réservations">
-               <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button layoutX="532.0" layoutY="446.0" mnemonicParsing="false" onAction="#paneLoginShow" style="-fx-background-color: #f7c139;" text="Exit">
-               <font>
-                  <Font name="Times New Roman Bold" size="15.0" />
-               </font></Button>
-            <Button fx:id="btConsultations" layoutX="257.0" layoutY="252.0" mnemonicParsing="false" onAction="#paneConsultationsShow" prefHeight="50.0" prefWidth="335.0" style="-fx-background-color: #f7c139;" text="Consultations">
-               <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="paneAjouterRes" layoutX="172.0" layoutY="73.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff9d9;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="paneAfficherTicket" prefHeight="491.0" prefWidth="496.0">
          <children>
-            <ComboBox fx:id="cbxTicketAjouterRes" layoutX="100.0" layoutY="130.0" prefHeight="40.0" prefWidth="400.0" promptText="Nom Film" />
-            <ComboBox fx:id="cbxAlimAjouterRes" layoutX="100.0" layoutY="202.0" prefHeight="40.0" prefWidth="400.0" promptText="Marque Aliment" />
-            <Button fx:id="btAjouterRes" layoutX="100.0" layoutY="325.0" mnemonicParsing="false" onAction="#ajouterRes" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #f7c139;" text="Confirmer" textFill="WHITE">
-               <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#paneReservationShow" style="-fx-background-color: #f7c139;" text="Back">
-               <font>
-                  <Font name="Times New Roman Bold" size="15.0" />
-               </font></Button>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="paneModifierRes" layoutX="89.0" layoutY="50.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff9d9;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <ComboBox fx:id="cbxTicketModifierRes" layoutX="89.0" layoutY="177.0" prefHeight="40.0" prefWidth="400.0" promptText="Nom Film" />
-            <ComboBox fx:id="cbxAlimModifierRes" layoutX="89.0" layoutY="250.0" prefHeight="40.0" prefWidth="400.0" promptText="Marque Aliment" />
-            <Button fx:id="btModifierRes" layoutX="89.0" layoutY="348.0" mnemonicParsing="false" onAction="#modifierRes" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #f7c139;" text="Confirmer" textFill="WHITE">
-               <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#paneReservationShow" style="-fx-background-color: #f7c139;" text="Back" />
-            <TextField fx:id="tfIdResModifierRes" layoutX="89.0" layoutY="106.0" prefHeight="40.0" prefWidth="400.0" promptText="ID Réservation" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="paneSuppRes" layoutX="14.0" layoutY="35.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff9d9;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Button fx:id="btSupprimerRes" layoutX="90.0" layoutY="263.0" mnemonicParsing="false" onAction="#supprimerRes" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #f7c139;" text="Confirmer" textFill="WHITE">
-               <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#paneReservationShow" style="-fx-background-color: #f7c139;" text="Back" />
-            <TextField fx:id="tfIdResSupprimerRes" layoutX="90.0" layoutY="198.0" prefHeight="40.0" prefWidth="400.0" promptText="ID Réservation" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="paneAfficherRes" layoutX="24.0" layoutY="45.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff9d9;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#paneReservationShow" style="-fx-background-color: #f7c139;" text="Back" />
-            <Label fx:id="labelAfficherRes" layoutX="96.0" layoutY="119.0" prefHeight="21.0" prefWidth="456.0" />
-            <Button fx:id="btImprimer" layoutX="96.0" layoutY="419.0" mnemonicParsing="false" onAction="#imprimerRes" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #f7c139;" text="Imprimer" textFill="WHITE">
-               <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
-            <TableView fx:id="tvRes" layoutX="34.0" layoutY="80.0" prefHeight="308.0" prefWidth="533.0" style="-fx-background-color: #f7c139;">
-              <columns>
-                <TableColumn fx:id="clmnIdRes" prefWidth="70.0" text="Id Res" />
-                <TableColumn fx:id="clmnIdUser" prefWidth="73.0" text="Id User" />
-                  <TableColumn fx:id="clmnIdTicket" prefWidth="72.0" text="Id Ticket" />
-                  <TableColumn fx:id="clmnIdAlim" prefWidth="73.0" text="Id Alim" />
-                  <TableColumn fx:id="clmnPrix" prefWidth="70.0" text="Prix" />
-                  <TableColumn fx:id="clmnDate" prefWidth="95.0" text="Date" />
-                  <TableColumn fx:id="clmnHeure" prefWidth="79.0" text="Heure" />
-              </columns>
+            <ImageView fitHeight="629.0" fitWidth="805.0" layoutX="-23.0" layoutY="-25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/backg.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="fermerbutton" layoutX="544.0" layoutY="381.0" mnemonicParsing="false" onAction="#fermer" prefHeight="41.0" prefWidth="69.0" style="-fx-background-color: #FBE5CD;" text="fermer" />
+            <Button fx:id="btnajouterTicketShow" layoutX="18.0" layoutY="191.0" mnemonicParsing="false" onAction="#ajouterShowTicket" prefHeight="25.0" prefWidth="69.0" style="-fx-background-color: #FBE5CD;" text="Ajouter" />
+            <Button fx:id="btnmodifierTicketShow" layoutX="18.0" layoutY="254.0" mnemonicParsing="false" onAction="#modifierShowTicket" prefHeight="25.0" prefWidth="69.0" style="-fx-background-color: #FBE5CD;" text="Modifier" />
+            <Button fx:id="btnSupprimerT" layoutX="17.0" layoutY="222.0" mnemonicParsing="false" onAction="#SupprimerTicket" style="-fx-background-color: #FBE5CD;" text="Supprimer" />
+            <TextField fx:id="tfchercherticket" layoutX="15.0" layoutY="30.0" onKeyTyped="#recherche" promptText="Chercher" />
+            <TableView fx:id="AfficheTicket" blendMode="SRC_ATOP" cache="true" layoutX="123.0" layoutY="92.0" onMouseClicked="#getSelectedTicket" prefHeight="249.0" prefWidth="615.0">
+               <columns>
+                  <TableColumn fx:id="colIDTicket" prefWidth="75.0" text="IDTicket" visible="false" />
+                  <TableColumn fx:id="colprixTicket" prefWidth="75.0" text="Prix" />
+                  <TableColumn fx:id="colplace" prefWidth="75.0" text="NbPlace" />
+                  <TableColumn fx:id="colsalle" prefWidth="75.0" text="Salle" />
+                  <TableColumn fx:id="colDate" prefWidth="75.0" text="Date" />
+                  <TableColumn fx:id="colheurs" prefWidth="75.0" text="Heurs" />
+                  <TableColumn fx:id="colfilm" prefWidth="75.0" text="Film" />
+                  <TableColumn fx:id="colpromo" prefWidth="75.0" text="Promotion" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+               <effect>
+                  <SepiaTone />
+               </effect>
             </TableView>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="paneConsultations" layoutX="38.0" layoutY="22.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <ImageView fitHeight="500.0" fitWidth="600.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="341.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@backg.png" />
+                  <Image url="@../image/background-removebg-preview.png" />
                </image>
             </ImageView>
-            <Button fx:id="btConsulterFilms" layoutX="251.0" layoutY="94.0" mnemonicParsing="false" onAction="#paneConsultetFilmsShow" prefHeight="50.0" prefWidth="335.0" style="-fx-background-color: #f7c139;" text="Consulter Films">
+            <Button fx:id="btndeco" layoutX="18.0" layoutY="295.0" mnemonicParsing="false" onAction="#deconnecter" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: #FBE5CD;" text="Deconnecter">
                <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="btConsulterActualites" layoutX="251.0" layoutY="225.0" mnemonicParsing="false" onAction="#paneConsultetActualitesShow" prefHeight="50.0" prefWidth="335.0" style="-fx-background-color: #f7c139;" text="Consulter Actualités">
-               <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="btConsulterAlim" layoutX="251.0" layoutY="159.0" mnemonicParsing="false" onAction="#paneConsultetAlimShow" prefHeight="50.0" prefWidth="335.0" style="-fx-background-color: #f7c139;" text="Consulter Aliments">
-               <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button layoutX="532.0" layoutY="446.0" mnemonicParsing="false" onAction="#paneLoginShow" style="-fx-background-color: #f7c139;" text="Exit">
-               <font>
-                  <Font name="Times New Roman Bold" size="15.0" />
-               </font>
-            </Button>
-            <Button layoutX="251.0" layoutY="53.0" mnemonicParsing="false" onAction="#paneReservationShow" style="-fx-background-color: #f7c139;" text="Back">
-               <font>
-                  <Font name="Times New Roman Bold" size="15.0" />
+                  <Font name="Times New Roman" size="13.0" />
                </font></Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="paneConsulterFilms" layoutX="51.0" layoutY="-10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff9d9;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="paneAjouterTicket" prefHeight="490.0" prefWidth="735.0" visible="false">
          <children>
-            <Button layoutX="26.0" layoutY="24.0" mnemonicParsing="false" onAction="#paneConsultationsShow" style="-fx-background-color: #f7c139;" text="Back" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="paneConsulterAlim" layoutX="61.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff9d9;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Button layoutX="26.0" layoutY="24.0" mnemonicParsing="false" onAction="#paneConsultationsShow" style="-fx-background-color: #f7c139;" text="Back" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="paneConsulterActualites" layoutX="61.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff9d9;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Button layoutX="26.0" layoutY="24.0" mnemonicParsing="false" onAction="#paneConsultationsShow" style="-fx-background-color: #f7c139;" text="Back" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="paneAdmin" layoutX="18.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <ImageView fitHeight="500.0" fitWidth="600.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="16.20001220703125" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="17.0">
+            <ImageView fitHeight="489.0" fitWidth="745.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@backg.png" />
+                  <Image url="@../image/backg.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="258.0" fitWidth="311.0" layoutX="268.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="441.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@background-removebg-preview.png" />
+                  <Image url="@../image/background-removebg-preview.png" />
                </image>
             </ImageView>
-            <Button layoutX="256.0" layoutY="28.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="335.0" style="-fx-background-color: #f7c139;" text="Gérer Films">
+            <TextField fx:id="tfprixT" layoutX="241.0" layoutY="42.0" prefHeight="41.0" prefWidth="206.0" promptText="Prix" />
+            <TextField fx:id="tfPlace" layoutX="241.0" layoutY="83.0" prefHeight="41.0" prefWidth="206.0" promptText="Place" />
+            <TextField fx:id="tfSalle" layoutX="241.0" layoutY="118.0" prefHeight="41.0" prefWidth="206.0" promptText="Salle" />
+            <Button fx:id="btnAjouterTicket" layoutX="249.0" layoutY="375.0" mnemonicParsing="false" onAction="#AjouterTicket" prefHeight="53.0" prefWidth="193.0" style="-fx-background-color: #FBE5CD;" text="Ajouter" textFill="#141313">
+               <font>
+                  <Font name="Times New Roman" size="30.0" />
+               </font></Button>
+            <ComboBox fx:id="cbxFilm" layoutX="242.0" layoutY="228.0" prefHeight="35.0" prefWidth="206.0" promptText="Film" style="-fx-background-color: #FBE5CD;" />
+            <ComboBox fx:id="cbxpromo" layoutX="242.0" layoutY="263.0" prefHeight="35.0" prefWidth="206.0" promptText="Promo" style="-fx-background-color: #FBE5CD;" />
+            <DatePicker fx:id="dtdate" layoutX="241.0" layoutY="159.0" prefHeight="35.0" prefWidth="206.0" promptText="jj/mm/aa" />
+            <TextField fx:id="tfheurs" layoutX="241.0" layoutY="194.0" prefHeight="35.0" prefWidth="206.0" promptText="heurs" />
+            <Button fx:id="btnretour" layoutX="25.0" layoutY="30.0" mnemonicParsing="false" onAction="#paneAfficherShowTicket" style="-fx-background-color: #FBE5CD;" text="Retour">
+               <font>
+                  <Font name="Times New Roman" size="18.0" />
+               </font></Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneModifierTicket" prefHeight="489.0" prefWidth="735.0" visible="false">
+         <children>
+            <ImageView fitHeight="615.0" fitWidth="761.0" layoutX="-26.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/backg.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="438.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/background-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="tfprix1" layoutX="230.0" layoutY="49.0" prefHeight="35.0" prefWidth="232.0" promptText="Prix" />
+            <TextField fx:id="tfPlace1" layoutX="230.0" layoutY="84.0" prefHeight="35.0" prefWidth="232.0" promptText="Place" />
+            <Button fx:id="btnModifierTicket" layoutX="254.0" layoutY="311.0" mnemonicParsing="false" onAction="#ModifierTicket" prefHeight="53.0" prefWidth="184.0" style="-fx-background-color: #FBE5CD;" text="Modifier" textFill="#0a0a0a">
                <font>
                   <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button layoutX="256.0" layoutY="84.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="335.0" style="-fx-background-color: #f7c139;" text="Gérer Aliments">
+               </font></Button>
+            <DatePicker fx:id="dtdate1" layoutX="229.0" layoutY="154.0" prefHeight="35.0" prefWidth="232.0" promptText="jj/mm/aa" />
+            <TextField fx:id="tfheurs1" layoutX="229.0" layoutY="189.0" prefHeight="35.0" prefWidth="232.0" promptText="Heurs" />
+            <TextField fx:id="tfsalle1" layoutX="229.0" layoutY="119.0" prefHeight="35.0" prefWidth="232.0" promptText="Salle" />
+            <ComboBox fx:id="cbxFilm1" layoutX="230.0" layoutY="224.0" prefHeight="35.0" prefWidth="232.0" promptText="Film" style="-fx-background-color: #FBE5CD;" />
+            <ComboBox fx:id="cbxpromo1" layoutX="229.0" layoutY="259.0" prefHeight="35.0" prefWidth="232.0" promptText="Promo" style="-fx-background-color: #FBE5CD;" />
+            <Button fx:id="btnretour1" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#paneAfficherShowTicket" style="-fx-background-color: #FBE5CD;" text="Retour">
                <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button layoutX="256.0" layoutY="140.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="335.0" style="-fx-background-color: #f7c139;" text="Gérer Tickets">
-               <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="btAfficherRes1" layoutX="256.0" layoutY="196.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="335.0" style="-fx-background-color: #f7c139;" text="Gérer Promotions">
-               <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button layoutX="532.0" layoutY="446.0" mnemonicParsing="false" onAction="#paneLoginShow" style="-fx-background-color: #f7c139;" text="Exit">
-               <font>
-                  <Font name="Times New Roman Bold" size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="btConsultations1" layoutX="257.0" layoutY="252.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="335.0" style="-fx-background-color: #f7c139;" text="Gérer Actualités">
-               <font>
-                  <Font name="Times New Roman Bold" size="20.0" />
-               </font>
-            </Button>
+                  <Font name="Times New Roman" size="18.0" />
+               </font></Button>
+            <TextField fx:id="tfid12" layoutX="229.0" layoutY="18.0" prefHeight="25.0" prefWidth="232.0" visible="false" />
          </children>
       </AnchorPane>
    </children>
