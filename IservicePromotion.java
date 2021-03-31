@@ -15,9 +15,10 @@ import java.util.List;
 public interface IservicePromotion {
     
     public void AddPromotion(Promotion p) throws SQLException ;
-    public List<Promotion> AfficherPromotion(int id) throws SQLException;
-        public void supprimerpromotion(Promotion p);
-        public void modifierpromotion(int id, Promotion p);
+    public List<Promotion> AfficherPromotion() throws SQLException;
+        public void Supprimerpromotion(Promotion p);
+        public void ModifierPromotion(int id, Promotion p)throws SQLException;
+          // public void recherche() throws SQLException;
 
     
 }

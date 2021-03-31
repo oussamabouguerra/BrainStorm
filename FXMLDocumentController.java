@@ -3,136 +3,135 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ticket;
+package gestion_promotion;
 
-import Entities.Ticket;
-import static Entities.Ticket.Pdp;
-import static Entities.Ticket.dates;
-import Service.ServiceTicket;
+import Entities.Promotion;
+import static Entities.Promotion.pdp;
+import Service.ServicePromotion;
 import Utils.Maconnexion;
-import java.awt.event.ActionListener;
+import static com.sun.deploy.config.JREInfo.clear;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.security.cert.PKIXRevocationChecker.Option;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import static java.util.Locale.filter;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.InvalidationListener;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
-import javafx.scene.Node;
+import javafx.geometry.Pos;
+import javafx.print.PrinterJob;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
-import static jdk.nashorn.internal.objects.NativeArray.some;
-//import static sun.misc.MessageUtils.where;
+import static javax.swing.JOptionPane.showMessageDialog;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 /**
  *
- * @author oussama
+ * @author Med Aziz
  */
 public class FXMLDocumentController implements Initializable {
-    
+    Connection cnx ;
+    String codopromo;
+    int index=-1 ;
+    @FXML
     private Label label;
-    private TextField tfID;
+    private TextField tftype;
+    
     @FXML
-    private TextField tfPlace;
+    private TextField tfdescription;
+    private TextField tfpourcentage;
+    private TextField tfid;
     @FXML
-    private TextField tfSalle;
-     
- 
+    private Button btnajout;
+    private Button btnmod;
     @FXML
-    private TableColumn<Ticket, Integer> colplace;
+    private TableView<Promotion> Affiche;
     @FXML
-   private TableColumn<Ticket, Integer>colsalle;
+    private Button btnsupprimer;
     @FXML
-    private TableColumn<Ticket, Integer> colfilm;
+    private TableColumn<Promotion, String> colnom;
     @FXML
-   private TableColumn<Ticket, Integer> colpromo;
+    private TableColumn<Promotion, String> coltype;
     @FXML
-    private Button fermerbutton;
-     
+    private TableColumn<Promotion, String> coldescription;
     @FXML
-    private TableColumn<Ticket, String> colDate;
+    private TableColumn<Promotion, String> colpourcentage;
+    @FXML 
+    private Button fermerbutton ;
+    
     @FXML
-    private TableColumn<Ticket, String> colheurs;
+    private Button btnajouterShow;
     @FXML
-    private ComboBox<String> cbxFilm;
+    private Button btnmodifierShow;
+   
     @FXML
-    private ComboBox<String> cbxpromo;
+    private ComboBox<String> cbType;
+    
     @FXML
-    private DatePicker dtdate;
+    private Button btnmodifier;
     @FXML
-    private TextField tfheurs;
-       Connection cnx;
+    private Button btnRetour;
+    private TextField tfDescription;
     @FXML
-    private TextField tfprix1;
+    private Button btnafficher;
     @FXML
-    private TextField tfPlace1;
+    private ComboBox<String> cbxtype;
+    private TextField tfidModifier;
+    private TextField tfidmodifier;
+    private TextField tfnommod;
     @FXML
-    private DatePicker dtdate1;
+    private TextField tfdescriptionmod;
     @FXML
-    private TextField tfheurs1;
+    private Button imprimerpromotion;
+    private TextField tfchercher;
     @FXML
-    private TextField tfsalle1;
+    private TextField tfrecherche;
     @FXML
-    private ComboBox<String> cbxFilm1;
+    private ComboBox<?> combo;
     @FXML
-    private ComboBox<String> cbxpromo1;
-    private ComboBox<String> cbxId;
+    private AnchorPane PaneLogin;
     @FXML
-    private Button btnretour;
+    private AnchorPane paneSignUp;
     @FXML
-    private Button btnretour1;
-    @FXML
-    private AnchorPane paneLogin;
+    private ComboBox<String> ComboSignUp;
     @FXML
     private TextField tfusername;
     @FXML
@@ -140,296 +139,124 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button btnlogin;
     @FXML
-    private Button tfsignup;
+    private TextField tfname;
     @FXML
-    private ComboBox<String> cbxctype;
+    private TextField tfcin;
     @FXML
-    private ComboBox<String> cbxtup;
+    private TextField tfmail;
     @FXML
-    private AnchorPane paneSignUp;
+    private TextField tfpwd;
     @FXML
-    private Button btndeco;
-     @FXML
-    private TextField tfid12;
-
-    int indexticket=-1;
+    private Button btnsign;
     @FXML
-    private AnchorPane paneAjouterTicket;
+    private ComboBox<String> cbxcategorie;
     @FXML
-    private TextField tfprixT;
+    private TableColumn<Promotion, String> colcat;
+    private ComboBox<String> cbxId;
     @FXML
-    private AnchorPane paneAfficherTicket;
+    private ComboBox<String> cbxcategorie1;
     @FXML
-    private AnchorPane paneModifierTicket;
+    private AnchorPane paneQuiz;
     @FXML
-    private Button btnAjouterTicket;
+    private Button btnconfirmer;
+    private ComboBox<String> cbxcode;
     @FXML
-    private Button btnModifierTicket;
+    private TableColumn<?, ?> colcode;
     @FXML
-    private Button btnajouterTicketShow;
+    private TextField tfcode;
+    int index1=-1 ;
     @FXML
-    private Button btnmodifierTicketShow;
+    private TextField tfcode2;
     @FXML
-    private Button btnSupprimerT;
+    private TextField tfid2;
     @FXML
-    private TableColumn<Ticket, Integer> colIDTicket;
+    private Button btnspiderman;
     @FXML
-    private TableColumn<Ticket, String> colprixTicket;
+    private Button btnjoker;
     @FXML
-    private TableView<Ticket> AfficheTicket;
+    private Button btntitanic;
     @FXML
-    private TextField tfchercherticket;
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
-            ObservableList<Ticket> TicketListe = FXCollections.observableArrayList();
-    ObservableList<Ticket> TicketList = FXCollections.observableArrayList();
-  int index =-1;
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-      afficherlistTicket();
-    
-      
- 
-          
-    }    
-public void afficherlistTicket(){
-   try{
-
-            Connection cnx=Maconnexion.getInstance().getConnection();
-            
-          String query = "SELECT * FROM ticket";
-          Statement st;
-          ResultSet rs;
-              st = cnx.createStatement();
-              rs = st.executeQuery(query);
-              Ticket ticket;
-              while(rs.next()){
-ticket = new Ticket(rs.getInt("IDTicket"),rs.getString("PrixTicket"),rs.getString("NbPlace"),rs.getString("Salle"),rs.getString("Heurs"),rs.getString("Date"),rs.getString("Film"),rs.getString("Promo"));
-                 TicketList.add(ticket);
-
-              }
-              
-          }catch (Exception ex){
-            ex.printStackTrace();
-            System.out.println("Error on Building Data");
-          }
-      colIDTicket.setCellValueFactory(new PropertyValueFactory<>("ID"));
-      colprixTicket.setCellValueFactory(new PropertyValueFactory<>("Prix" ));
-      colplace.setCellValueFactory(new PropertyValueFactory<>("NbPlace"));
-      colsalle.setCellValueFactory(new PropertyValueFactory<>("Salle"));
-      colDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
-      colheurs.setCellValueFactory(new PropertyValueFactory<>("Heurs"));
-      colfilm.setCellValueFactory(new PropertyValueFactory<>("Film"));
-      colpromo.setCellValueFactory(new PropertyValueFactory<>("Promo")); 
-      AfficheTicket.setItems(TicketList);
-
-}
-public void afficherlistTicket2()
-{
-            TicketList.removeAll(TicketList);
-   try{
-
-            Connection cnx=Maconnexion.getInstance().getConnection();
-            
-          String query = "SELECT * FROM ticket";
-          Statement st;
-          ResultSet rs;
-              st = cnx.createStatement();
-              rs = st.executeQuery(query);
-              Ticket ticket;
-              while(rs.next()){
-ticket = new Ticket(rs.getInt("IDTicket"),rs.getString("PrixTicket"),rs.getString("NbPlace"),rs.getString("Salle"),rs.getString("Heurs"),rs.getString("Date"),rs.getString("Film"),rs.getString("Promo"));
-                 TicketList.add(ticket);
-
-              }
-              
-          }catch (Exception ex){
-            ex.printStackTrace();
-            System.out.println("Error on Building Data");
-          }
-      colIDTicket.setCellValueFactory(new PropertyValueFactory<>("ID"));
-      colprixTicket.setCellValueFactory(new PropertyValueFactory<>("Prix"));
-      colplace.setCellValueFactory(new PropertyValueFactory<>("NbPlace"));
-      colsalle.setCellValueFactory(new PropertyValueFactory<>("Salle"));
-      colDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
-      colheurs.setCellValueFactory(new PropertyValueFactory<>("Heurs"));
-      colfilm.setCellValueFactory(new PropertyValueFactory<>("Film"));
-      colpromo.setCellValueFactory(new PropertyValueFactory<>("Promo")); 
-
-      AfficheTicket.setItems(TicketList);
-}
- 
+    private AnchorPane paneQuizSpiderman;
     @FXML
-     private void AjouterTicket(ActionEvent event) {
-         
-          Alert alert =new Alert (Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Confirmation") ;
-                alert.setHeaderText("Voulez-vous Ajouter Ticket?") ;
-        ServiceTicket sr=new ServiceTicket();
-        Ticket r=new Ticket();
-       // int idUser=1;  //to modify after ending login code
-         
-        r.setFilm((cbxFilm.getValue()));  
-        r.setPromo((cbxpromo.getValue()));    
-            //    r.setPourcentage((cbxpromo.getValue()));    
-
-        cnx=Maconnexion.getInstance().getConnection();
-         
-        String nomm=(cbxFilm.getValue());
-        String typee= (cbxpromo.getValue());
-        
-        try {
-            Statement stm= cnx.createStatement();
-            String query ="select * from film  ";
-            ResultSet res = stm.executeQuery(query);
-
-            if (res.next()) {
- 
-             r.setDate(dtdate.getValue().toString());
-             r.setHeurs(tfheurs.getText());
-           /*  String query2 ="select type from promotion   ";
-                String FN = res.getString("type");*/
-
-             int p=Integer.parseInt(tfprixT.getText());
-             int k=Integer.parseInt(cbxpromo.getValue());
-String prixf =String.valueOf(p*k/100);
-int h=Integer.parseInt(prixf);
-String prixfinal =String.valueOf(p-h);
-             
-             r.setPrix(prixfinal);
-             r.setNbPlace((tfPlace.getText()));
-             r.setSalle(tfSalle.getText());
-                }
-            
-            String query2 ="select * from promotion   ";
-            ResultSet res2 = stm.executeQuery(query2);
-            if (res2.next()) {
-              
-            
-           
-                }
-          
-               Optional <ButtonType> result=alert.showAndWait();
-                if (result.get()==ButtonType.OK)
-                {
-                    Stage stage =(Stage) btnAjouterTicket.getScene().getWindow() ;
-                 
-             
-            sr.AddTicket(r);
-                }
-         
-        } catch (Exception e) {
-            System.out.println("Pas d'ajout!"); 
-            System.out.println(e.getMessage()); 
-       }
-        
-        
-    }
-  private void remplirCbxAjouterTicket()
-    {
-        cnx=Maconnexion.getInstance().getConnection();
-        try {
-            
-            String query ="select * from film";
-            Statement stm= cnx.createStatement();
-            ResultSet res = stm.executeQuery(query);
-           
-            while(res.next())
-            {
-             cbxFilm.getItems().add(res.getString("nom")+"");
-            }
-           
-            System.out.println("combobox2 rempli!");
-            
-            Statement stm2= cnx.createStatement();
-            String query2 ="select Pourcentage from promotion";
-            ResultSet res2 = stm2.executeQuery(query2);
-            
-            while(res2.next())
-            {
-                cbxpromo.getItems().add(res2.getString("Pourcentage")+""); 
-            }
-           
-            System.out.println("combobox2 rempli!");
-            
-        } catch (SQLException e) {
-            System.out.println("erreur combobox!");
-            System.out.println(e.getMessage());
-        }
-    } 
-  /*private void remplirtfAjouter()
-    {
-        cnx=Maconnexion.getInstance().getConnection();
-        try {
-            
-            String query ="SELECT * FROM film INNER JOIN ticket ON Film = Nom ";
-            Statement stm= cnx.createStatement();
-            ResultSet res = stm.executeQuery(query);
-           
-            while(res.next())
-            {
- String FN = res.getString("Prix");
-                            tfprix.setText(FN);            }
-           
-            System.out.println("tf prix rempli!");
-            
-       /*     Statement stm2= cnx.createStatement();
-            String query2 ="select type from promotion";
-            ResultSet res2 = stm2.executeQuery(query2);
-            
-            while(res2.next())
-            {
-                cbxpromo.getItems().add(res2.getString("type")+""); 
-            }
-           
-            System.out.println("combobox2 rempli!");
-            
-        } catch (SQLException e) {
-            System.out.println("erreur combobox!");
-            System.out.println(e.getMessage());
-            }
-    } 
-*/
-  private void remplirCbxModifierTicket()
-    {    
-    
-        cnx=Maconnexion.getInstance().getConnection();
-        
-        try{
-            String query ="select nom from film";
-            Statement stm= cnx.createStatement();
-            ResultSet res = stm.executeQuery(query);
-           
-            while(res.next())
-            {
-             cbxFilm1.getItems().add(res.getString("nom")+"");
-            }
-           
-            System.out.println("combobox1 rempli!");
-            
-            Statement stm2= cnx.createStatement();
-            String query2 ="select Pourcentage from promotion";
-            ResultSet res2 = stm2.executeQuery(query2);
-            
-            while(res2.next())
-            {
-                cbxpromo1.getItems().add(res2.getString("Pourcentage")+""); 
-            }
-           
-            System.out.println("combobox2 rempli!");
-            
-        } catch (SQLException e) {
-            System.out.println("erreur combobox!");
-            System.out.println(e.getMessage());
-        }
-    }
- 
+    private RadioButton choix112;
     @FXML
-   private void fermer () {
+    private RadioButton choix212;
+    @FXML
+    private RadioButton choix113;
+    @FXML
+    private AnchorPane paneQuizJoker;
+    private RadioButton choix300;
+    private RadioButton choix301;
+    private RadioButton choix400;
+    private RadioButton choix401;
+    @FXML
+    private RadioButton choix114;
+    @FXML
+    private Button btnconfirmer6;
+    @FXML
+    private RadioButton choix700;
+    @FXML
+    private RadioButton choix701;
+    @FXML
+    private RadioButton choix800;
+    @FXML
+    private RadioButton choix801;
+    @FXML
+    private Button btnconfirmer5;
+    @FXML
+    private AnchorPane paneQuizTitanic;
+    @FXML
+    private AnchorPane paneQuizStarWars;
+    @FXML
+    private AnchorPane panespiderman2;
+    @FXML
+    private Button btnconfirmerspiderman;
+    @FXML
+    private Button btnStarWars;
+    @FXML
+    private AnchorPane paneStarWars2;
+    @FXML
+    private Button btnsuivantstarwars;
+    @FXML
+    private Button btnsuivanttitanic;
+    @FXML
+    private AnchorPane panetitanicshow2;
+    @FXML
+    private AnchorPane paneAfficherpromo;
+    @FXML
+    private AnchorPane paneAjouterpromo;
+    @FXML
+    private AnchorPane paneModifierpromo;
+    @FXML
+    private TextField tfnompromo;
+    @FXML
+    private TextField tfnompromo1;
+    @FXML
+    private TableColumn<Promotion, Integer> colidpromo;
+    @FXML
+    private RadioButton choix1000;
+    @FXML
+    private RadioButton choix1100;
+    @FXML
+    private RadioButton choix900;
+    @FXML
+    private RadioButton choix901;
+    @FXML
+    private RadioButton radioJoaquinJoker;
+    @FXML
+    private RadioButton radioCesarJoker;
+    @FXML
+    private Button btnsuivantJoker;
+    @FXML
+    private RadioButton radioToddJoker;
+    @FXML
+    private RadioButton radioScottJoker;
+    @FXML
+    private Button btnconfirmerjoker;
+    @FXML
+    private AnchorPane paneQuizJoker2;
+    @FXML
+            private void fermer () {
                 Alert alert =new Alert (Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Confirmation") ;
                 alert.setHeaderText("Voulez vous fermer la fenêtre?") ;
@@ -438,240 +265,48 @@ String prixfinal =String.valueOf(p-h);
                 {
                     Stage stage =(Stage) fermerbutton.getScene().getWindow() ;
                     stage.close() ;
-                }}
-
-   /* private void SupprimerTicket(ActionEvent event) {
-                    Ticket t =new Ticket();
-
-         try {
-            String req = "DELETE FROM `ticket` WHERE `id`.`id` =?";
-            PreparedStatement stm = null;
-            stm.setInt(1, t.getID());
-            stm.executeUpdate();
-            System.out.println("element supprimer");
-
-        } catch (SQLException ex) {
-         }
-    }*/
-   private void supprimerticket(ActionEvent event) {
-         Alert alert =new Alert (Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Confirmation") ;
-                alert.setHeaderText("Voulez vous supprimer la promotion?") ;//problem
-         ServiceTicket pr=new ServiceTicket();
-         Ticket p=new Ticket() ;
-         
-          Optional <ButtonType> result=alert.showAndWait();
-                if (result.get()==ButtonType.OK)
-                {
-                    Stage stage =(Stage) btnSupprimerT.getScene().getWindow() ;
-                    
                     
                 }
-
-
-         TicketListe=AfficheTicket.getSelectionModel().getSelectedItems();
-         Connection cnx = Maconnexion.getInstance().getConnection();
-            int id;
-            id=TicketListe.get(0).getID();
-            System.out.println(id);
-             
-        try {
+            }
             
-           String query = "delete from ticket where ID = ?";
-      PreparedStatement preparedStmt = cnx.prepareStatement(query);
-      preparedStmt.setInt(1, id);
+        ObservableList<Promotion> PromotionListe = FXCollections.observableArrayList();
 
-      // execute the preparedstatement
-      preparedStmt.execute();
-      
-     
-        } catch (SQLException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+    ObservableList<Promotion> PromotionList = FXCollections.observableArrayList();
+        //////// methode select users ///////
+  
+   @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        
+        afficherlistepromo() ;
+    
+    }/*
+    public static void playMusic (String filepath){
+        InputStream music ;
+        try{
+            music=new FileInputStream(new File(filepath));
+            AudioStream audios=new AudioStream(music);
+            AudioPlayer.player.start(audios);
         }
-         pr.supprimer(p);
-         afficherlistTicket2() ;
-        
-         
-         
-        
-        
-        
-    }
-  @FXML
-private void ModifierTicket(ActionEvent event) throws SQLException {
-        Alert alert =new Alert (Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Confirmation") ;
-                alert.setHeaderText("Voulez-vous modifier Ticket?") ;
-         ServiceTicket sr=new ServiceTicket();
-        Ticket f=new Ticket();
-            String query ="select * from ticket ";
-            Statement stm= cnx.createStatement();
-            ResultSet res = stm.executeQuery(query);
-           while(res.next()){
-           f.setID(Integer.parseInt(tfid12.getText()));
-
-           }
-           
-        int id=Integer.parseInt(tfid12.getText());
-int p=Integer.parseInt(tfprix1.getText());
-int k=Integer.parseInt(cbxpromo1.getValue());
-String prixf =String.valueOf(p*k/100);
-int h=Integer.parseInt(prixf);
-String prixfinal =String.valueOf(p-h);
-             
-             f.setPrix(prixfinal);
-//r.setIdTicket(Integer.parseInt(cbIdTicket.getValue()));  //error
-//r.setIdAlim(Integer.parseInt(cbIdAliment.getValue()));    //erro
-          f.setNbPlace((tfPlace1.getText()));
-         f.setSalle((tfsalle1.getText()));
-         f.setDate(dtdate1.getValue().toString());
-         f.setHeurs(tfheurs1.getText());
-        f.setFilm((cbxFilm1.getValue()));
-        f.setPromo((cbxpromo1.getValue()));  
-
- 
-         try {
-           
-            // FilmList.add(f);
-             Optional <ButtonType> result=alert.showAndWait();
-                if (result.get()==ButtonType.OK)
-                {
-                    Stage stage =(Stage) btnModifierTicket.getScene().getWindow() ;
-                     sr.modifierTicket(f,id);
-                }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-       }
-   
-       
-    }
-/*
-@FXML
-private void ModifierTicket(ActionEvent event) throws SQLException {
-       
- 
-          Alert alert =new Alert (Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Confirmation") ;
-                alert.setHeaderText("Voulez-vous modifier Ticket?") ;
-         ServiceTicket sr=new ServiceTicket();
-        Ticket f=new Ticket();
-            String query ="select * from ticket ";
-            Statement stm= cnx.createStatement();
-            ResultSet res = stm.executeQuery(query);
-           while(res.next()){
-           f.setID(Integer.parseInt(tfid12.getText()));
-
-           }
-            
-        int id=Integer.parseInt(tfid12.getText());
-int p=Integer.parseInt(tfprix1.getText());
-int k=Integer.parseInt(cbxpromo1.getValue());
-String prixf =String.valueOf(p*k/100);
-int h=Integer.parseInt(prixf);
-String prixfinal =String.valueOf(p-h);
-             
-             f.setPrix(prixfinal); 
-//r.setIdTicket(Integer.parseInt(cbIdTicket.getValue()));  //error
-//r.setIdAlim(Integer.parseInt(cbIdAliment.getValue()));    //erro
-          f.setNbPlace((tfPlace1.getText()));
-         f.setSalle((tfsalle1.getText()));
-         f.setDate(dtdate1.getValue().toString());
-         f.setHeurs(tfheurs1.getText());
-        f.setFilm((cbxFilm1.getValue())); 
-        f.setPromo((cbxpromo1.getValue()));  
-
- 
-         try {
-            
-            // FilmList.add(f);
-             Optional <ButtonType> result=alert.showAndWait();
-                if (result.get()==ButtonType.OK)
-                {
-                    Stage stage =(Stage) btnModifierTicket.getScene().getWindow() ;
-                     sr.modifierTicket(f,id);
-                }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-       }
-        
-    
-        
-    }
-*/
-  
-  
-
-    @FXML 
-    private void ajouterShowTicket(ActionEvent event) throws SQLException {
-           // paneLogin.setVisible(false);
-        //paneSignUp.setVisible(false);
-        paneAfficherTicket.setVisible(false);
-        paneAjouterTicket.setVisible(true);
-        paneModifierTicket.setVisible(false);
-       
-      remplirCbxAjouterTicket();   //call it in login btn
-              //remplirtfAjouter();
-     
-        
-    }
-        
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,"Error") ;
+        }
+    }*/
     @FXML
-    public void paneAfficherShowTicket() {
-        paneLogin.setVisible(false);
-      //  paneSignUp.setVisible(false);
-        //paneReservation.setVisible(true);
-        paneAjouterTicket.setVisible(false);
-        paneModifierTicket.setVisible(false);
-         paneAfficherTicket.setVisible(true);
-      //  cbxTicketModifierRes.getItems().clear();
-        //cbxAlimModifierRes.getItems().clear();
-        //cbxTicketAjouterRes.getItems().clear();
-        //cbxAlimAjouterRes.getItems().clear();
-        //tfIdResModifierRes.setText("");
-        //tfIdResSupprimerRes.setText("");
-TicketList.clear();
-        afficherlistTicket2();
-    }
-    
-    public void paneLoginShow() {
-        cbxctype.getItems().clear();
-        cbxctype.getItems().clear();
-        paneLogin.setVisible(true);
-      //  paneSignUp.setVisible(false);
-         paneAjouterTicket.setVisible(false);
-        paneModifierTicket.setVisible(false);
-         paneAfficherTicket.setVisible(false);
- 
-      //  cbxctype.getItems().add(("Simple User"));
-        //cbxctype.getItems().add("Administrateur");
-        tfusername.setText("");
-        tfmdp.setText("");
-    }
-    @FXML
-    public void paneSignUpShow() {
-        cbxtup.getItems().clear();
-        cbxtup.getItems().clear();
-        paneLogin.setVisible(false);
-        paneSignUp.setVisible(true);
-         paneAjouterTicket.setVisible(false);
-        paneModifierTicket.setVisible(false);
-         paneAfficherTicket.setVisible(false);
-        
-    }
-      @FXML
     private void login(ActionEvent event) {
         cnx=Maconnexion.getInstance().getConnection();
-                         int idUser;
+                         int iduser;
 
             try {
                 
-                String query ="select * from simpleusers where `idUser`="+tfusername.getText()+" and `mdp`="+tfmdp.getText()+" ";
+                String query ="select * from simpleusers where `iduser`="+tfusername.getText()+" and `mdp`="+tfmdp.getText()+" ";
                 Statement stm=cnx.createStatement();
                 ResultSet res= stm.executeQuery(query);
                 if(res.next())
                 {
-                    JOptionPane.showMessageDialog(null, "ID et mdp correctes!");
-                    paneAfficherShowTicket();
+                    JOptionPane.showMessageDialog(null, "Mail et mdp correctes!");
+                    paneAfficherShow();
                     
                 }
                
@@ -685,97 +320,508 @@ TicketList.clear();
        
         
     }
+   
+    public void paneAfficherShow() {
+        PaneLogin.setVisible(false);
+      //  paneSignUp.setVisible(false);
+        //paneReservation.setVisible(true);
+        paneAjouterpromo.setVisible(false);
+        paneModifierpromo.setVisible(false);
+         paneAfficherpromo.setVisible(true);
+      //  cbxTicketModifierRes.getItems().clear();
+        //cbxAlimModifierRes.getItems().clear();
+        //cbxTicketAjouterRes.getItems().clear();
+        //cbxAlimAjouterRes.getItems().clear();
+        //tfIdResModifierRes.setText("");
+        //tfIdResSupprimerRes.setText("");
 
-    @FXML
-    private void modifierShowTicket(ActionEvent event) throws SQLException {
-          // paneLogin.setVisible(false);
-        //paneSignUp.setVisible(false);
-        paneAfficherTicket.setVisible(false);
-        paneAjouterTicket.setVisible(false);
-        paneModifierTicket.setVisible(true);
-              remplirCbxModifierTicket();
-
-        ServiceTicket sr=new ServiceTicket();
-        Ticket f;   
-        
-      f=sr.displayById(Ticket.getPdp());
-      //  System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-
-       tfid12.setText(String.valueOf(Pdp));
-       tfprix1.setText(f.getPrix());
-       tfsalle1.setText(f.getSalle());
-       tfPlace1.setText(f.getNbPlace());
-              tfheurs1.setText(f.getHeurs());
-            //  dtdate.setDate(f.getDate());
-        // f.setDate(dtdate1.getValue().toString());
-
-      //  remplirCbxAjouterRes();   //call it in login btn
-      dtdate1.setValue(LocalDate.now());
-      cbxFilm1.setValue(f.getFilm());
-      cbxpromo1.setValue(f.getPromo());
+    }/*
+    public void paneLoginShow() {
+        combo.getItems().clear();
+        combo.getItems().clear();
+        paneLogin.setVisible(true);
+        paneSignUp.setVisible(false);
+        paneAfficher.setVisible(false);
+        paneAjouterRes.setVisible(false);
+        paneModifierRes.setVisible(false);
+        paneSuppRes.setVisible(false);
+        paneAfficherRes.setVisible(false);
+        cbxTypeLogin.getItems().add("Simple User");
+        cbxTypeLogin.getItems().add("Administrateur");
+        tfUsernameLogin.setText("");
+        tfPasswordLogin.setText("");
     }
+    
+    public void paneSignUpShow() {
+        cbxTypeSignUp.getItems().clear();
+        cbxTypeSignUp.getItems().clear();
+        paneLogin.setVisible(false);
+        paneSignUp.setVisible(true);
+        paneReservation.setVisible(false);
+        paneAjouterRes.setVisible(false);
+        paneModifierRes.setVisible(false);
+        paneSuppRes.setVisible(false);
+        paneAfficherRes.setVisible(false);
+        cbxTypeSignUp.getItems().add("Simple User");
+        cbxTypeSignUp.getItems().add("Administrateur");
+   
+    }*/
+    public void afficherlistepromo(){
+          try{
+          Connection cnx=Maconnexion.getInstance().getConnection();
+          String query = "SELECT * FROM promotion";
+          Statement st;
+          ResultSet rs;
+              st = cnx.createStatement();
+              rs = st.executeQuery(query);
+              Promotion promotion;
+              while(rs.next()){
+                  promotion = new Promotion(rs.getInt("id"),rs.getString("nom"),rs.getString("type"),rs.getString("description"),rs.getString("pourcentage"),rs.getString("categorie"),rs.getString("code"));
+                 PromotionList.add(promotion);
+              }
+              
+          }catch (Exception ex){
+            ex.printStackTrace();
+            System.out.println("Error on Building Data");
+          }
+      colidpromo.setCellValueFactory(new PropertyValueFactory<Promotion,Integer>("id"));
+      colnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+      coltype.setCellValueFactory(new PropertyValueFactory<>("type"));
+      coldescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+      colpourcentage.setCellValueFactory(new PropertyValueFactory<>("pourcentage"));
+      colcat.setCellValueFactory(new PropertyValueFactory<>("categorie"));
+                    colcode.setCellValueFactory(new PropertyValueFactory<>("code"));
 
-    @FXML
-    private void SupprimerTicket(ActionEvent event) {
-               Alert alert =new Alert (Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Confirmation") ;
-                alert.setHeaderText("Voulez vous supprimer la promotion?") ;//problem
-         ServiceTicket pr=new ServiceTicket();
-         Ticket p=new Ticket() ;
+ 
+      
+      Affiche.setItems(PromotionList);
+    }
+    public void afficherliste2promo(){
+        PromotionList.removeAll(PromotionList);
+
+               try{
+          Connection cnx=Maconnexion.getInstance().getConnection();
+          String query = "SELECT * FROM promotion";
+          Statement st;
+          ResultSet rs;
+              st = cnx.createStatement();
+              rs = st.executeQuery(query);
+              Promotion promotion;
+              while(rs.next()){
+                  promotion = new Promotion(rs.getInt("id"),rs.getString("nom"),rs.getString("type"),rs.getString("description"),rs.getString("pourcentage"),rs.getString("categorie"),rs.getString("code"));
+                 PromotionList.add(promotion);
+              }
+              
+          }catch (Exception ex){
+            ex.printStackTrace();
+            System.out.println("Error on Building Data");
+          }
+      colidpromo.setCellValueFactory(new PropertyValueFactory<Promotion,Integer>("id"));
+      colnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+      coltype.setCellValueFactory(new PropertyValueFactory<>("type"));
+      coldescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+      colpourcentage.setCellValueFactory(new PropertyValueFactory<>("pourcentage"));
+       colcat.setCellValueFactory(new PropertyValueFactory<>("categorie"));
+              colcode.setCellValueFactory(new PropertyValueFactory<>("code"));
+
+      
+      Affiche.setItems(PromotionList);
+        
+    }
+    
+@FXML
+     private void ajouterpromotion(ActionEvent event) {
          
-          Optional <ButtonType> result=alert.showAndWait();
+          Alert alert =new Alert (Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation") ;
+                alert.setHeaderText("Voulez-vous Ajouter une promotion?") ;
+        ServicePromotion sr=new ServicePromotion();
+        Promotion r=new Promotion();
+       // int idUser=1;  //to modify after ending login code
+         
+        r.setCategorie((cbxcategorie.getValue()));  
+       // r.setPromo((cbxpromo.getValue()));    
+        
+        cnx=Maconnexion.getInstance().getConnection();
+         
+     //   String nomm=(cbxcat.getValue());
+     //   String typee= (cbxpromo.getValue());
+        
+        try {
+            Statement stm= cnx.createStatement();
+            String query ="select * from film  ";
+            ResultSet res = stm.executeQuery(query);
+
+            if (res.next()) {
+                    r.setCategorie(cbxcategorie.getValue()) ;
+             r.setNom(tfnompromo.getText());
+             
+             if((cbType.getValue().equals("Jeudi"))&&(tfcode.getText().equals("Monoprix")))
+            {r.setPourcentage("35");
+             r.setType(cbType.getValue());}
+             else if((cbType.getValue().equals("Jeudi"))&&(tfcode.getText().equals("Plan b"))){
+                 r.setPourcentage("35");
+             r.setType(cbType.getValue());
+             }
+             else if 
+                 ((cbType.getValue().equals("Jeudi"))&&(tfcode.getText().equals("Arena gym"))){
+                 r.setPourcentage("35");
+             r.setType(cbType.getValue());
+                 
+             }
+             else if 
+                     ((cbType.getValue().equals("Jeudi"))&&(tfcode.getText().equals("Carrefour"))){
+                 r.setPourcentage("35");
+             r.setType(cbType.getValue());
+                 
+             }
+             else if (cbType.getValue().equals("Jeudi")){
+                 r.setPourcentage("20");
+             r.setType(cbType.getValue());
+             }
+          
+          else if ((cbType.getValue().equals("Aid"))&&(tfcode.getText().equals("Carrefour"))){
+              r.setPourcentage("45");
+             r.setType(cbType.getValue());
+          }
+          else if ((cbType.getValue().equals("Aid"))&&(tfcode.getText().equals("Monoprix"))){
+              r.setPourcentage("45");
+             r.setType(cbType.getValue());
+          }
+           else if ((cbType.getValue().equals("Aid"))&&(tfcode.getText().equals("Plan b"))){
+              r.setPourcentage("45");
+             r.setType(cbType.getValue());
+          }
+           else if ((cbType.getValue().equals("Aid"))&&(tfcode.getText().equals("Arena gym"))){
+              r.setPourcentage("45");
+             r.setType(cbType.getValue());
+          }
+           else if(cbType.getValue().equals("Aid"))
+              {r.setPourcentage("30");
+             r.setType(cbType.getValue());}
+           else if((cbType.getValue().equals("Semaine du reveillon"))&&(tfcode.getText().equals("Arena gym")))
+              {r.setPourcentage("30");
+             r.setType(cbType.getValue());}
+           else if((cbType.getValue().equals("Semaine du reveillon"))&&(tfcode.getText().equals("Plan b")))
+              {r.setPourcentage("30");
+             r.setType(cbType.getValue());}
+            else if((cbType.getValue().equals("Semaine du reveillon"))&&(tfcode.getText().equals("Carrefour")))
+              {r.setPourcentage("30");
+             r.setType(cbType.getValue());}
+            else if((cbType.getValue().equals("Semaine du reveillon"))&&(tfcode.getText().equals("Monoprix")))
+              {r.setPourcentage("30");
+             r.setType(cbType.getValue());}
+          else if(cbType.getValue().equals("Semaine du reveillon"))
+              {r.setPourcentage("15");
+             r.setType(cbType.getValue());}
+           else if((cbType.getValue().equals("Etudiant"))&&(tfcode.getText().equals("Monoprix")))
+              {r.setPourcentage("25");
+             r.setType(cbType.getValue());}
+           else if((cbType.getValue().equals("Etudiant"))&&(tfcode.getText().equals("Carrefour")))
+              {r.setPourcentage("25");
+             r.setType(cbType.getValue());}
+           else if((cbType.getValue().equals("Etudiant"))&&(tfcode.getText().equals("Plan b")))
+              {r.setPourcentage("25");
+             r.setType(cbType.getValue());}
+           else if((cbType.getValue().equals("Etudiant"))&&(tfcode.getText().equals("Arena gym")))
+              {r.setPourcentage("25");
+             r.setType(cbType.getValue());}
+           else if(cbType.getValue().equals("Etudiant"))
+              {r.setPourcentage("10");
+             r.setType(cbType.getValue());}
+             r.setDescription((tfdescription.getText()));
+             r.setCode((tfcode.getText()));
+
+            // r.setPourcentage((tfpourcentage.getText()));
+            
+                }
+               Optional <ButtonType> result=alert.showAndWait();
                 if (result.get()==ButtonType.OK)
                 {
-                    Stage stage =(Stage) btnSupprimerT.getScene().getWindow() ;
-                    
-                    
+                    Stage stage =(Stage) btnajout.getScene().getWindow() ;
+                      JOptionPane.showMessageDialog(null,"promotion ajoutée") ;
+                 
+             
+            sr.AddPromotion(r);
                 }
+         
+        } catch (Exception e) {
+            System.out.println("Pas d'ajout!"); 
+            System.out.println(e.getMessage()); 
+       }    
+    }
+    @FXML
+   private void modifierpromotion (ActionEvent event) throws SQLException {
+       
+ 
+          
+        Alert alert =new Alert (Alert.AlertType.CONFIRMATION);
+         alert.setTitle("Confirmation") ;
+         alert.setHeaderText("Voulez-vous modifier cette promotion?") ;
+         ServicePromotion sr=new ServicePromotion();
+         Promotion f=new Promotion();
+        //Promotion f=new Promotion(Promotion.getPdp(),tfnom1.getText(),tfdescriptionmod.getText(),);
+        //Produit p = new Produit(parseInt(fid_produitfxid.getText()),ftitrefxid.getText(),11, fdescriptionfxid.getText(),pathimage, Float.parseFloat(fprixfxid.getText()));
+           // ServiceProduit pdao = ServiceProduit.getInstance();
+            //pdao.update(p);
+        
 
 
-         TicketListe=AfficheTicket.getSelectionModel().getSelectedItems();
+
+      Affiche.setItems(PromotionList);
+                 PromotionListe=Affiche.getSelectionModel().getSelectedItems();
+                
+            String query ="select * from promotion ";
+            Statement stm= cnx.createStatement();
+            ResultSet res = stm.executeQuery(query);
+           
+            while(res.next())
+            {
+f.setId(Integer.parseInt(tfid2.getText()));             
+            }
+        int id=Integer.parseInt(tfid2.getText());
+               
+             f.setNom(tfnompromo1.getText());
+
+ 
+       if((cbxtype.getValue().equals("Jeudi"))&&(tfcode2.getText().equals("Monoprix")))
+            {f.setPourcentage("35");
+             f.setType(cbxtype.getValue());}
+              if((cbxtype.getValue().equals("Jeudi"))&&(tfcode2.getText().equals("Plan b"))){
+                 f.setPourcentage("35");
+                                           f.setType(cbxtype.getValue());
+
+             System.out.println("pourcentage modifié");
+
+             }
+
+              
+             else if 
+                 ((cbxtype.getValue().equals("Jeudi"))&&(tfcode2.getText().equals("Arena gym"))){
+                 f.setPourcentage("35");
+             f.setType(cbxtype.getValue());
+                 
+             }
+             else if 
+                     ((cbxtype.getValue().equals("Jeudi"))&&(tfcode2.getText().equals("Carrefour"))){
+                 f.setPourcentage("35");
+             f.setType(cbxtype.getValue());
+                 
+             }
+             else if (cbxtype.getValue().equals("Jeudi")){
+                 f.setPourcentage("20");
+             f.setType(cbxtype.getValue());
+             }
+          
+          else if ((cbxtype.getValue().equals("Aid"))&&(tfcode2.getText().equals("Carrefour"))){
+              f.setPourcentage("45");
+             f.setType(cbxtype.getValue());
+          }
+          else if ((cbxtype.getValue().equals("Aid"))&&(tfcode2.getText().equals("Monoprix"))){
+              f.setPourcentage("45");
+             f.setType(cbxtype.getValue());
+          }
+           else if ((cbxtype.getValue().equals("Aid"))&&(tfcode2.getText().equals("Plan b"))){
+              f.setPourcentage("45");
+             f.setType(cbxtype.getValue());
+          }
+           else if ((cbxtype.getValue().equals("Aid"))&&(tfcode2.getText().equals("Arena gym"))){
+              f.setPourcentage("45");
+             f.setType(cbxtype.getValue());
+          }
+           else if(cbxtype.getValue().equals("Aid"))
+              {f.setPourcentage("30");
+             f.setType(cbxtype.getValue());}
+           else if((cbxtype.getValue().equals("Semaine du reveillon"))&&(tfcode2.getText().equals("Arena gym")))
+              {f.setPourcentage("30");
+             f.setType(cbxtype.getValue());}
+           else if((cbxtype.getValue().equals("Semaine du reveillon"))&&(tfcode2.getText().equals("Plan b")))
+              {f.setPourcentage("30");
+             f.setType(cbxtype.getValue());}
+            else if((cbxtype.getValue().equals("Semaine du reveillon"))&&(tfcode2.getText().equals("Carrefour")))
+              {f.setPourcentage("30");
+             f.setType(cbxtype.getValue());}
+            else if((cbxtype.getValue().equals("Semaine du reveillon"))&&(tfcode2.getText().equals("Monoprix")))
+              {f.setPourcentage("30");
+             f.setType(cbxtype.getValue());}
+          else if(cbxtype.getValue().equals("Semaine du reveillon"))
+              {f.setPourcentage("15");
+             f.setType(cbxtype.getValue());}
+           else if((cbxtype.getValue().equals("Etudiant"))&&(tfcode2.getText().equals("Monoprix")))
+              {f.setPourcentage("25");
+             f.setType(cbxtype.getValue());}
+           else if((cbxtype.getValue().equals("Etudiant"))&&(tfcode2.getText().equals("Carrefour")))
+              {f.setPourcentage("25");
+             f.setType(cbxtype.getValue());}
+           else if((cbxtype.getValue().equals("Etudiant"))&&(tfcode2.getText().equals("Plan b")))
+              {f.setPourcentage("25");
+             f.setType(cbxtype.getValue());}
+           else if((cbxtype.getValue().equals("Etudiant"))&&(tfcode2.getText().equals("Arena gym")))
+              {f.setPourcentage("25");
+             f.setType(cbxtype.getValue());}
+           else if(cbxtype.getValue().equals("Etudiant"))
+              {f.setPourcentage("10");
+             f.setType(cbxtype.getValue());}
+              f.setDescription((tfdescriptionmod.getText()));
+        f.setCategorie((cbxcategorie1.getValue()));
+                  f.setCode((tfcode2.getText()));
+
+
+ 
+         try {
+            // FilmList.add(f);
+             Optional <ButtonType> result=alert.showAndWait();
+                if (result.get()==ButtonType.OK)
+                {
+                    Stage stage =(Stage) btnmodifier.getScene().getWindow() ;
+                                JOptionPane.showMessageDialog(null,"promotion modifiée") ;
+
+                     sr.ModifierPromotion(id,f);
+                }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+       }
+        
+    }
+    @FXML
+       private void getSelected(){
+          index1=Affiche.getSelectionModel().getSelectedIndex();
+        if(index1<=-1){
+            return;
+        }
+        Promotion.setPdp(colidpromo.getCellData(index1));
+        System.out.println("Promotionaaaaaaaaaaaaaaaaaa"+Promotion.getPdp());   
+    
+        
+    }
+   
+@FXML
+   private void supprimerpromotion(ActionEvent event) {
+         Alert alert =new Alert (Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation") ;
+                alert.setHeaderText("Voulez vous supprimer la promotion?") ;//problem
+         ServicePromotion pr=new ServicePromotion();
+         Promotion p=new Promotion() ;
+         PromotionListe=Affiche.getSelectionModel().getSelectedItems();
          Connection cnx = Maconnexion.getInstance().getConnection();
             int id;
-            id=TicketListe.get(0).getID();
+            id=PromotionListe.get(0).getId();
             System.out.println(id);
              
         try {
             
-           String query = "delete from ticket where IDTicket = ?";
+           String query = "delete from promotion where id = ?";
       PreparedStatement preparedStmt = cnx.prepareStatement(query);
       preparedStmt.setInt(1, id);
 
       // execute the preparedstatement
-      preparedStmt.execute();
-      
+       Optional <ButtonType> result=alert.showAndWait();
+                if (result.get()==ButtonType.OK)
+                {
+                    Stage stage =(Stage) btnsupprimer.getScene().getWindow() ;
+                    
+                          preparedStmt.execute();
+                                   pr.Supprimerpromotion(p);
+
+         afficherliste2promo() ;
+                              JOptionPane.showMessageDialog(null, "Promotion supprimée! \n ");
+
+
+                }
+
      
         } catch (SQLException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         pr.supprimer(p);
-         afficherlistTicket2() ;
-        
-         
-    } 
-
-    private void SignUp(ActionEvent event) {
-        if(cbxtup.getValue().equals("Simple User"))
-        {
-            
-        }
-        else if(cbxtup.getValue().equals("Administrateur"))
-        {
-            
-        }
+        }    
     }
-   public void rechercheTicket() throws SQLException{
-    ServiceTicket re= new ServiceTicket() ;
-    List<Ticket>results = new ArrayList<>();
-    results = re.AfficherTicket();
-     FilteredList<Ticket> filteredData = new FilteredList<>(TicketList , b -> true);
-		Ticket r = new Ticket();
+
+    @FXML
+    private void ajouterShowpromo(ActionEvent event) {
+        // paneLogin.setVisible(false);
+        //paneSignUp.setVisible(false);
+        paneAfficherpromo.setVisible(false);
+        paneAjouterpromo.setVisible(true);
+        paneModifierpromo.setVisible(false);
+        cbType.getItems().add("Etudiant");
+        cbType.getItems().add("Jeudi");
+        cbType.getItems().add("Aid");
+        cbType.getItems().add("Semaine du reveillon");
+        remplirCbxAjouter();
+/*         cbxcode.getItems().add("Monoprix");
+        cbxcode.getItems().add("Arena Gym");
+        cbxcode.getItems().add("Plan b");
+        cbxcode.getItems().add("Batbout");*/
+        //remplirCbxAjouterCode();
+        
+        
+
+
+      //  remplirCbxAjouterRes();   //call it in login btn
+    }
+
+    @FXML
+    private void modifierShowpromo(ActionEvent event) throws SQLException {
+      // paneLogin.setVisible(false);
+       // paneSignUp.setVisible(false);
+       
+        paneAfficherpromo.setVisible(false);
+        paneAjouterpromo.setVisible(false);
+        paneModifierpromo.setVisible(true);
+        
+        /*index1=Affiche.getSelectionModel().getSelectedIndex();
+        if(index1<=-1){
+            return;
+        }
+       tfid.setText( String.valueOf(colid.getCellData(index1)));
+       tfnom1.setText(colnom.getCellData(index1));
+       tfdescriptionmod.setText(coldescription.getCellData(index1));
+       tfcode2.setText(colcode.getCellData(index1).toString());
+
+       //imageviewfxid.setText(titrefxid.getCellData(index));
+      // fprixfxid.setText(prixfxid.getCellData(index).toString());
+        Promotion.setPdp(colid.getCellData(index1));*/
+     
+         cbxtype.getItems().add("Etudiant");
+        cbxtype.getItems().add("Jeudi");
+        cbxtype.getItems().add("Aid");
+        cbxtype.getItems().add("Semaine du reveillon");
+        remplirCbxModifier();
+         
+        ServicePromotion sr=new ServicePromotion();
+        Promotion f;        
+        f=sr.displayById(Promotion.getPdp()) ;
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+        System.out.println(f);
+        tfid2.setText(String.valueOf(pdp));
+        tfnompromo1.setText(f.getNom());
+        cbxtype.setValue(f.getType());
+        cbxcategorie1.setValue(f.getCategorie());
+        tfdescriptionmod.setText(f.getDescription());
+        tfcode2.setText(f.getCode());
+      //  remplirCbxModifierRes();  //call it in login btn
+       
+    }
+
+    @FXML
+    private void paneAfficher(ActionEvent event) {
+        paneAfficherpromo.setVisible(true);
+        paneAjouterpromo.setVisible(false);
+        paneModifierpromo.setVisible(false);
+        PromotionList.clear();
+        
+        afficherlistepromo();
+        
+    }
+   public void recherchepromo()throws SQLException{
+    ServicePromotion re= new ServicePromotion() ;
+    List<Promotion>results = new ArrayList<>();
+    results = re.AfficherPromotion();
+     FilteredList<Promotion> filteredData = new FilteredList<>(PromotionList , b -> true);
+		Promotion r = new Promotion();
 		// 2. Set the filter Predicate whenever the filter changes.
-		tfchercherticket.textProperty().addListener((observable, oldValue, newValue) -> {
-			filteredData.setPredicate(Ticket -> {
+		tfrecherche.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData.setPredicate(Promotion -> {
 				// If filter text is empty, display all persons.
 								
 				if (newValue == null || newValue.isEmpty()) {
@@ -785,76 +831,414 @@ TicketList.clear();
 				// Compare first name and last name of every person with filter text.
 				String lowerCaseFilter = newValue.toLowerCase();
  
-				   if (Ticket.getPromo().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+				   if (Promotion.getNom().toLowerCase().indexOf(lowerCaseFilter) != -1) {
 					return true; // Filter matches last name.
-				}else if (String.valueOf(Ticket.getPromo()).indexOf(lowerCaseFilter)!=-1){
-				     return true;}
-                                   
-                                 else   if (Ticket.getFilm().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+				}
+                                  else if (Promotion.getType().toLowerCase().indexOf(lowerCaseFilter) != -1) {
 					return true; // Filter matches last name.
 				} 
-                                  else if (String.valueOf(Ticket.getFilm()).indexOf(lowerCaseFilter)!=-1){
+				else if (String.valueOf(r.getNom()).indexOf(lowerCaseFilter)!=-1){
 				     return true;}
-				
-
 				     else  
 				    	 return false; // Does not match.
-                                   
 			});
 		});
 		
 		// 3. Wrap the FilteredList in a SortedList. 
-		SortedList<Ticket> sortedData = new SortedList<>(filteredData);
+		SortedList<Promotion> sortedData = new SortedList<>(filteredData);
 		
 		// 4. Bind the SortedList comparator to the TableView comparator.
 		// 	  Otherwise, sorting the TableView would have no effect.
-		sortedData.comparatorProperty().bind(AfficheTicket.comparatorProperty());
+		sortedData.comparatorProperty().bind(Affiche.comparatorProperty());
 		
 		// 5. Add sorted (and filtered) data to the table.
-		AfficheTicket.setItems(sortedData);
-               
+		Affiche.setItems(sortedData);
+    }
+
+    @FXML
+    private void imprimerRes(ActionEvent event) {
+        ServicePromotion pp = new ServicePromotion();
         
+         try {
+             label.setText(pp.AfficherPromotion().toString());
+            PrinterJob job=PrinterJob.createPrinterJob();
+            if(job != null)
+            {
+            job.printPage(label);//affiche
+            job.endJob();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        
+    }
+
+    @FXML
+    private void SignUp(ActionEvent event) {
+          if(ComboSignUp.getValue().equals("Simple User"))
+        {
+            
+        }
+        else if(ComboSignUp.getValue().equals("Administrateur"))
+        {
+            
+        }
+    }
+
+    @FXML
+    private void SignUpShow(ActionEvent event) {
+         
+    
+       ComboSignUp.getItems().clear();
+        ComboSignUp.getItems().clear();
+        PaneLogin.setVisible(false);
+        paneSignUp.setVisible(true);
+        paneAfficherpromo.setVisible(false);
+        paneAjouterpromo.setVisible(false);
+        paneModifierpromo.setVisible(false);
+      //  paneSupprimer.setVisible(false);
+        paneAfficherpromo.setVisible(false);
+        ComboSignUp.getItems().add("Simple User");
+       // SignUp.getItems().add("Administrateur");
+   
+    }
+    
+private void remplirCbxAjouter()
+    {
+        cnx=Maconnexion.getInstance().getConnection();
+        try {
+            
+            String query ="select Categorie from film";
+            Statement stm= cnx.createStatement();
+            ResultSet res = stm.executeQuery(query);
+           
+            while(res.next())
+            {
+             cbxcategorie.getItems().add(res.getString("Categorie")+"");
+            }
+           
+            System.out.println("combobox1 rempli!");
+            
+         
+        } catch (SQLException e) {
+            System.out.println("erreur combobox!");
+            System.out.println(e.getMessage());
+        }
+    }/*
+private void remplirCbxAjouterCode()
+    {
+        cnx=Maconnexion.getInstance().getConnection();
+        try {
+            
+            String query ="select idCode from code";
+            Statement stm= cnx.createStatement();
+            ResultSet res = stm.executeQuery(query);
+           
+            while(res.next())
+            {
+             tfcode.getText().add(res.getString("idCode")+"");
+            }
+           
+            System.out.println("combobox1 rempli!");
+            
+         
+        } catch (SQLException e) {
+            System.out.println("erreur combobox!");
+            System.out.println(e.getMessage());
+        }
+    }*/
+private void remplirCbxModifier()
+    {    
+    
+        cnx=Maconnexion.getInstance().getConnection();
+        
+       
+        try{
+            String query ="select categorie from film";
+            Statement stm= cnx.createStatement();
+            ResultSet res = stm.executeQuery(query);
+           
+            while(res.next())
+            {
+             cbxcategorie1.getItems().add(res.getString("categorie")+"");
+            }
+           
+            System.out.println("combobox1 rempli!");
+            
+            
+            
+        } catch (SQLException e) {
+            System.out.println("erreur combobox!");
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+
+    @FXML
+    private void confirmer(ActionEvent event) {
+        if (choix112.isSelected()&&(choix113.isSelected())){
+           if(choix112.isSelected()&&(choix212.isSelected())||(choix113.isSelected())&&(choix114.isSelected())){
+                         JOptionPane.showMessageDialog(null, "Vous devez choisir une seule réponse! \n ");    
+
+           }
+           else
+           {
+                                                    playsound();
+
+          JOptionPane.showMessageDialog(null, "TRUE ANSWER! CHECK YOUR EMAIL FOR YOUR FREE TICKET "); 
+                                    
+                                     }
+         btnconfirmer.getScene().getWindow().hide();
+                                     try{
+                                         Stage stage= new Stage() ;
+                                        Parent root =FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+                                        Scene scene =new Scene(root) ;
+                                        stage.setScene(scene);
+                                        stage.show() ;
+                                     }catch (IOException ex){
+                                         System.out.println(ex);
+
+        }}
+        else{
+        playsound2();
+         JOptionPane.showMessageDialog(null, "Vous avez perdu! à la prochaine! \n ");
+        }
+
+    }
+
+    @FXML
+    private void paneQuizShow(ActionEvent event) {
+        paneAfficherpromo.setVisible(false);
+        paneAjouterpromo.setVisible(false);
+        paneModifierpromo.setVisible(false);
+        paneQuiz.setVisible(true);
+        PromotionList.clear();
+        
+        afficherlistepromo();
+        
+    }
+
+    @FXML
+    private void showQuizSpiderman(ActionEvent event) {
+        paneAfficherpromo.setVisible(false);
+        paneAjouterpromo.setVisible(false);
+        paneModifierpromo.setVisible(false);
+        paneQuiz.setVisible(false);
+        paneQuizSpiderman.setVisible(true);
+
+        PromotionList.clear();
+        
+        afficherlistepromo();
+        
+    }
+
+    @FXML
+    private void showQuizJoker(ActionEvent event) {
+          paneAfficherpromo.setVisible(false);
+        paneAjouterpromo.setVisible(false);
+        paneModifierpromo.setVisible(false);
+        paneQuiz.setVisible(false);
+        paneQuizSpiderman.setVisible(false);
+      paneQuizJoker.setVisible(true);
+
+        PromotionList.clear();
+        
+        afficherlistepromo();
+    }
+
+    @FXML
+    private void showQuizTitanic(ActionEvent event) {
+        paneAfficherpromo.setVisible(false);
+        paneAjouterpromo.setVisible(false);
+        paneModifierpromo.setVisible(false);
+        paneQuiz.setVisible(false);
+        paneQuizSpiderman.setVisible(false);
+//                paneQuizJoker.setVisible(false);
+                paneQuizTitanic.setVisible(true);
+
+        PromotionList.clear();
+        
+        afficherlistepromo();
+    }
+
+    @FXML
+    private void quizShowStarWars(ActionEvent event) {
+         paneAfficherpromo.setVisible(false);
+        paneAjouterpromo.setVisible(false);
+        paneModifierpromo.setVisible(false);
+        paneQuiz.setVisible(false);
+        paneQuizSpiderman.setVisible(false);
+             //   paneQuizJoker.setVisible(false);
+                paneQuizTitanic.setVisible(false);
+                                paneQuizStarWars.setVisible(true);
+
+        PromotionList.clear();
+        
+        afficherlistepromo();
+    }
+
+    private void confirmer2(ActionEvent event) {
+         if (choix300.isSelected()&&(choix401.isSelected())){
+           if(choix300.isSelected()&&(choix301.isSelected())||(choix400.isSelected())&&(choix401.isSelected())){
+                         JOptionPane.showMessageDialog(null, "Vous devez choisir une seule réponse! \n ");    
+
+           }
+           else
+          JOptionPane.showMessageDialog(null, "Réponse correcte! vous aurez une promotion de 10%! \n ");    
+        }
+        else  JOptionPane.showMessageDialog(null, "Vous avez perdu! à la prochaine! \n ");
+    }
+
+    @FXML
+    private void confimer6(ActionEvent event) {
+         if (choix1000.isSelected()&&(choix900.isSelected())){
+           if(choix1000.isSelected()&&(choix1100.isSelected())||(choix900.isSelected())&&(choix901.isSelected())){
+                         JOptionPane.showMessageDialog(null, "Vous devez choisir une seule réponse! \n "); 
+                         
+
+           }
+           else
+          JOptionPane.showMessageDialog(null, "TRUE ANSWER!CHECK YOUR EMAIL FOR YOUR FREE TICKET ! \n ");  
+           playsound();
+           
+        }
+        else { JOptionPane.showMessageDialog(null, "Vous avez perdu! à la prochaine! \n ");
+         playsound2();}
+    }
+String path =("C:\\Users\\Lenovo\\Desktop\\Gestion_Promotion\\dist\\Gestion_promo\\src\\music\\m.mp3"); 
+          Media media = new Media(new File(path).toURI().toString()); 
+          MediaPlayer mediaPlayer = new MediaPlayer(media); 
+          String paths =("C:\\Users\\Lenovo\\Desktop\\Gestion_Promotion\\dist\\Gestion_promo\\src\\music\\loser2.mp3"); 
+          Media medias = new Media(new File(paths).toURI().toString()); 
+          MediaPlayer mediaPlayers = new MediaPlayer(medias);
+    private void playsound(){
+          mediaPlayer.play(); 
+    }
+    
+ private void playsound2(){
+          mediaPlayers.play(); 
     }
     @FXML
-    private void deconnecter(ActionEvent event) {
-          btndeco.getScene().getWindow().hide();
+    private void confirmer5(ActionEvent event) {
+         if (choix700.isSelected()&&(choix800.isSelected())){
+           if(choix700.isSelected()&&(choix701.isSelected())||(choix800.isSelected())&&(choix801.isSelected())){
+                         JOptionPane.showMessageDialog(null, "Vous devez choisir une seule réponse! \n ");    
 
-        try {
-            Stage stage = new Stage();
-            stage.setTitle("");
-            Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+           }
+           else
+          JOptionPane.showMessageDialog(null, "Réponse correcte! Vous avez gagné un ticket gratuit pour le film STAR WARS\n ");
+                          playsound();
 
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException ex) {
-            System.out.println(ex);
         }
+        else  {JOptionPane.showMessageDialog(null, "Vous avez perdu! à la prochaine! \n ");
+         playsound2();}
     }
-  @FXML
-       private void getSelectedTicket(){
-          indexticket=AfficheTicket.getSelectionModel().getSelectedIndex();
-        if(indexticket<=-1){
-            return;
-        }
-        Ticket.setPdp(colIDTicket.getCellData(indexticket));
-        Ticket.setDates(colDate.getCellData(indexticket));
 
-        System.out.println(""+Ticket.getPdp());   
-      LocalDate Date = dtdate.getValue();
-         System.err.println("Selected date: " +Ticket.getDates());
+    @FXML
+    private void panespiderman2Show(ActionEvent event) {
+          paneAfficherpromo.setVisible(false);
+        paneAjouterpromo.setVisible(false);
+        paneModifierpromo.setVisible(false);
+        paneQuiz.setVisible(false);
+        paneQuizSpiderman.setVisible(false);
+               // paneQuizJoker.setVisible(false);
+                paneQuizTitanic.setVisible(false);
+                                paneQuizStarWars.setVisible(false);
+                                paneQuizSpiderman.setVisible(false);
+                                panespiderman2.setVisible(true);
+
+    }
+
+    @FXML
+    private void showQuizStarWars(ActionEvent event) {
+        paneAfficherpromo.setVisible(false);
+        paneAjouterpromo.setVisible(false);
+        paneModifierpromo.setVisible(false);
+        paneQuiz.setVisible(false);
+        paneQuizSpiderman.setVisible(false);
+//                paneQuizJoker.setVisible(false);
+                paneQuizTitanic.setVisible(false);
+                                paneQuizStarWars.setVisible(false);
+                                paneStarWars2.setVisible(true);
+
+        PromotionList.clear();
         
+        afficherlistepromo();
+    }
+
+    @FXML
+    private void panetitanic2(ActionEvent event) {
+        paneAfficherpromo.setVisible(false);
+        paneAjouterpromo.setVisible(false);
+        paneModifierpromo.setVisible(false);
+        paneQuiz.setVisible(false);
+        paneQuizSpiderman.setVisible(false);
+               // paneQuizJoker.setVisible(false);
+                paneQuizTitanic.setVisible(false);
+                                paneQuizStarWars.setVisible(false);
+                                paneQuizSpiderman.setVisible(false);
+                                panespiderman2.setVisible(false);
+                                panetitanicshow2.setVisible(true);
     }
 
     @FXML
     private void recherche(KeyEvent event) {
     }
 
-}
+    @FXML
+    private void showQuizJoker2(ActionEvent event) {
+        paneAfficherpromo.setVisible(false);
+        paneAjouterpromo.setVisible(false);
+        paneModifierpromo.setVisible(false);
+        paneQuiz.setVisible(false);
+        paneQuizSpiderman.setVisible(false);
+      paneQuizJoker.setVisible(false);
+       paneQuizJoker2.setVisible(true);
 
+        PromotionList.clear();
+        
+        afficherlistepromo();
+    }
 
+    @FXML
+    private void confirmerjoker(ActionEvent event) {
+        if (radioJoaquinJoker.isSelected()&&(radioToddJoker.isSelected())){
+           if(radioJoaquinJoker.isSelected()&&(radioCesarJoker.isSelected())||(radioToddJoker.isSelected())&&(radioScottJoker.isSelected())){
+                         JOptionPane.showMessageDialog(null, "Vous devez choisir une seule réponse! \n ");    
 
+           }
+           else
+           {
+                                                    playsound();
 
+          JOptionPane.showMessageDialog(null, "TRUE ANSWER! CHECK YOUR EMAIL FOR YOUR FREE TICKET "); 
+                                    
+                                     }
+         btnconfirmer.getScene().getWindow().hide();
+                                     try{
+                                         Stage stage= new Stage() ;
+                                        Parent root =FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+                                        Scene scene =new Scene(root) ;
+                                        stage.setScene(scene);
+                                        stage.show() ;
+                                     }catch (IOException ex){
+                                         System.out.println(ex);
+
+        }}
+        else{
+        playsound2();
+         JOptionPane.showMessageDialog(null, "Vous avez perdu! à la prochaine! \n ");
+        }
+    }
+
+     
+  
+    } 
+ 
     
+    
+
     
 
