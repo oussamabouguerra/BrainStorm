@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ac.FXMLDocumentController">
+   <children>
+      <AnchorPane fx:id="paneAfficher" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <ImageView fitHeight="400.0" fitWidth="600.0">
+               <image>
+                  <Image url="@../Image/backg.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="167.0" fitWidth="200.0" layoutX="292.0" layoutY="244.0">
+               <image>
+                  <Image url="@../Image/background-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <TableView fx:id="Affiche" layoutX="242.0" layoutY="44.0" prefHeight="200.0" prefWidth="343.0">
+              <columns>
+                <TableColumn fx:id="colidac" prefWidth="75.0" text="ID" visible="false" />
+                <TableColumn fx:id="colnom" prefWidth="101.0" text="Nom" />
+                  <TableColumn fx:id="colprenom" prefWidth="79.0" text="Prenom" />
+                  <TableColumn fx:id="colage" prefWidth="56.0" text="Age" />
+                  <TableColumn fx:id="colsurnom" prefWidth="106.0" text="Surnom" />
+              </columns>
+            </TableView>
+            <Button fx:id="btnajoutershow" layoutX="32.0" layoutY="263.0" mnemonicParsing="false" onAction="#ajouterShow" style="-fx-background-color: #FBE5CD;" text="Ajouter" />
+            <Button fx:id="btnModifierShow" layoutX="126.0" layoutY="263.0" mnemonicParsing="false" onAction="#modifiershow" style="-fx-background-color: #FBE5CD;" text="Modifier" />
+            <Button fx:id="btnsupp" layoutX="75.0" layoutY="319.0" mnemonicParsing="false" onAction="#supprimerActeur" style="-fx-background-color: #FBE5CD;" text="Supprimer" />
+            <TextField fx:id="tfrecherche" layoutX="14.0" layoutY="14.0" onKeyTyped="#recherche" prefHeight="30.0" prefWidth="144.0" promptText="chercher" />
+            <Button fx:id="btnfermer" layoutX="518.0" layoutY="357.0" mnemonicParsing="false" onAction="#fermerbutton" style="-fx-background-color: #FBE5CD;" text="Fermer" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneAjouter" prefHeight="400.0" prefWidth="600.0" visible="false">
+         <children>
+            <ImageView fitHeight="400.0" fitWidth="600.0">
+               <image>
+                  <Image url="@../Image/backg.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="167.0" fitWidth="200.0" layoutX="360.0" layoutY="223.0">
+               <image>
+                  <Image url="@../Image/background-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="tfnom" layoutX="198.0" layoutY="60.0" promptText="nom" />
+            <TextField fx:id="tfprenom" layoutX="198.0" layoutY="101.0" promptText="prenom" />
+            <TextField fx:id="tfage" layoutX="199.0" layoutY="143.0" promptText="age" />
+            <TextField fx:id="tfsurnom" layoutX="199.0" layoutY="181.0" promptText="surnom" />
+            <Button fx:id="btnajouter" layoutX="252.0" layoutY="236.0" mnemonicParsing="false" onAction="#AjouterActeur" style="-fx-background-color: #FBE5CD;" text="Ajouter" />
+            <Button fx:id="btnretouraj" layoutX="510.0" layoutY="30.0" mnemonicParsing="false" onAction="#paneAfficher" style="-fx-background-color: #FBE5CD;" text="Retour" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneModifier" prefHeight="400.0" prefWidth="637.0" visible="false">
+         <children>
+            <ImageView fitHeight="400.0" fitWidth="637.0">
+               <image>
+                  <Image url="@../Image/backg.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="167.0" fitWidth="200.0" layoutX="351.0" layoutY="219.0">
+               <image>
+                  <Image url="@../Image/background-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="tfnom1" layoutX="191.0" layoutY="73.0" promptText="Nom" />
+            <TextField fx:id="tfprenom1" layoutX="191.0" layoutY="116.0" promptText="Prenom" />
+            <TextField fx:id="tfage1" layoutX="191.0" layoutY="159.0" promptText="Age" />
+            <TextField fx:id="tfsurnom1" layoutX="191.0" layoutY="199.0" promptText="Surnom" />
+            <Button fx:id="btnmodifier" layoutX="240.0" layoutY="251.0" mnemonicParsing="false" onAction="#modifierActeur" style="-fx-background-color: #FBE5CD;" text="Modifier" />
+            <Button fx:id="btnretourmod" layoutX="497.0" layoutY="24.0" mnemonicParsing="false" onAction="#paneAfficher" style="-fx-background-color: #FBE5CD;" text="Retour" />
+            <TextField fx:id="tfidac" layoutX="189.0" layoutY="24.0" promptText="id" visible="false" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
