@@ -5,6 +5,7 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.SepiaTone?>
@@ -19,7 +20,7 @@
             <Image url="@../images/yellow-background.jpg" />
          </image>
       </ImageView>
-      <BarChart fx:id="stat" layoutX="360.0" layoutY="344.0" prefHeight="246.0" prefWidth="564.0" styleClass="check-box">
+      <BarChart fx:id="stat" layoutX="402.0" layoutY="345.0" prefHeight="246.0" prefWidth="564.0" styleClass="check-box">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -33,7 +34,7 @@
             <Image url="@../images/pdf.png" />
          </image>
       </ImageView>
-      <Button fx:id="Btn_imprimer" layoutX="742.0" layoutY="615.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="195.0" text="PDF" />
+      <Button fx:id="Btn_imprimer" layoutX="742.0" layoutY="615.0" mnemonicParsing="false" onAction="#imprimer" prefHeight="54.0" prefWidth="195.0" text="PDF" />
       <Button fx:id="precedent" layoutX="40.0" layoutY="27.0" mnemonicParsing="false" onAction="#precedent" prefHeight="42.0" prefWidth="149.0" text="Précédent" />
       <ImageView fitHeight="189.0" fitWidth="227.0" layoutX="471.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -41,14 +42,15 @@
          </image>
       </ImageView>
       <Button fx:id="Btn_supprimer" layoutX="45.0" layoutY="604.0" mnemonicParsing="false" onAction="#supprimer_aliment" prefHeight="33.0" prefWidth="158.0" text="DELETE" />
+      <Label fx:id="label" layoutX="380.0" layoutY="83.0" prefHeight="246.0" prefWidth="564.0" text="Label" />
       <TableView fx:id="table" layoutX="360.0" layoutY="25.0" prefHeight="327.0" prefWidth="597.0">
         <columns>
-          <TableColumn fx:id="id" prefWidth="105.0" text="ID aliment" />
-          <TableColumn fx:id="quantite" prefWidth="86.0" text="Quantité" />
-            <TableColumn fx:id="prix" prefWidth="104.0" text="Prix" />
-            <TableColumn fx:id="idp" prefWidth="137.0" text="ID promo" />
-            <TableColumn fx:id="type" prefWidth="72.0" text="Type" />
-            <TableColumn fx:id="marque" prefWidth="83.0" text="Marque" />
+          <TableColumn fx:id="idaliment" prefWidth="105.0" text="ID aliment" />
+          <TableColumn fx:id="quantitealiment" prefWidth="86.0" text="Quantité" />
+            <TableColumn fx:id="prixaliment" prefWidth="94.0" text="Prix" />
+            <TableColumn fx:id="idpaliment" prefWidth="139.0" text="ID promo" />
+            <TableColumn fx:id="typealiment" text="Type" />
+            <TableColumn fx:id="marquealiment" prefWidth="83.0" text="Marque" />
         </columns>
          <effect>
             <SepiaTone />
