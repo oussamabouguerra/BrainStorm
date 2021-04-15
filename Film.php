@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\PromotionRepository;
+use App\Repository\FilmRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PromotionRepository::class)
+ * @ORM\Entity(repositoryClass=FilmRepository::class)
  */
-class Promotion
+class Film
 {
     /**
      * @ORM\Id
@@ -20,27 +20,26 @@ class Promotion
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $pourcentage;
+    private $nom;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPourcentage(): ?string
+    public function getNom(): ?string
     {
-        return $this->pourcentage;
+        return $this->nom;
     }
 
-    public function setPourcentage(string $pourcentage): self
+    public function setNom(string $nom): self
     {
-        $this->pourcentage = $pourcentage;
+        $this->nom = $nom;
 
         return $this;
     }
     public function __toString()
     {
-        return (string) $this->getPourcentage();
-
+        return (string) $this->getNom();
     }
 }
