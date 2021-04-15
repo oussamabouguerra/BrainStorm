@@ -1,157 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block head %}
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="Dashboard">
-<meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-<title>Dashio - Bootstrap Admin Template</title>
+{% block title %}SimpleUser index{% endblock %}
 
-<!-- Favicons -->
-<link href="img/favicon.png" rel="icon">
-<link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-
-<!-- Bootstrap core CSS -->
-<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<!--external css-->
-<link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="css/zabuto_calendar.css">
-<link rel="stylesheet" type="text/css" href="lib/gritter/css/jquery.gritter.css" />
-<!-- Custom styles for this template -->
-<link href="css/style.css" rel="stylesheet">
-<link href="css/style-responsive.css" rel="stylesheet">
-{% endblock %}
 {% block body %}
+    <h1>SimpleUser index</h1>
 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Cin</th>
+                <th>Mail</th>
+                <th>Mdp</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for simple_user in simple_users %}
+            <tr>
+                <td>{{ simple_user.id }}</td>
+                <td>{{ simple_user.nom }}</td>
+                <td>{{ simple_user.prenom }}</td>
+                <td>{{ simple_user.cin }}</td>
+                <td>{{ simple_user.mail }}</td>
+                <td>{{ simple_user.mdp }}</td>
+                <td>
+                    <a href="{{ path('simple_user_show', {'id': simple_user.id}) }}">show</a>
+                    <a href="{{ path('simple_user_edit', {'id': simple_user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-
-    <div class="m-portlet__body">
-        <!--begin::Section-->
-        <div class="m-section">
-            <div class="m-section__content">
-                <div class="border-head">
-                    <h3>USER VISITS</h3>
-
-            </div>
-                <button type="button" class="btn" style="background-color: #0e2e42">
-                    <a href="Ajoutpromotion">Ajouter
-                    </a>
-                </button>
-                <table class="table m-table m-table--head-bg-success">
-                    <thead>
-                    <tr>
-                        <th>
-                            id
-                        </th>
-                        <th>
-                            nom
-                        </th>
-
-                        <th>
-                            type
-                        </th>
-
-                        <th>
-                            pourcentage
-                        </th>
-
-                        <th>
-                            description
-                        </th>
-                        <th>
-                            categorie
-                        </th>
-                        <th>
-                            code
-                        </th>
-                        <th>
-                            Modifier
-
-                        </th>
-                        <th>
-                            Delete
-
-                        </th>
-
-
-
-                    </tr>
-                    </thead>
-
-                    {% for U in promotion%}
-                    <tr>
-                        <td>
-
-                            {{ U.id }}
-                        </td>
-                        <td>
-                            {{ U.nom }}
-                        </td>
-
-                        <td>
-                            {{ U.type }}
-                        </td>
-                        <td>
-                            {{ U.pourcentage }}
-                        </td>
-                        <td>
-                            {{ U.description }}
-                        </td>
-                        <td>
-                            {{ U.categorie }}
-                        </td>
-                        <td>
-                            {{ U.code }}
-                        </td>
-
-                        <td>
-                            <button type="button" class="btn" style="background-color: #0e2e42">
-                                <a href="{{ path('u',{'id':U.id}) }}">Modifier
-                                </a>
-                            </button>
-
-                        </td>
-
-                        <td>
-                            <button type="button" class="btn" style="background-color: #0e2e42">
-                                <a href="{{ path('d',{'id':U.id}) }}">
-                                    Supprimer
-                                </a>
-                            </button>
-                        </td>
-
-
-
-                        {% endfor %}
-
-                        </tbody>
-                    </tr>
-                </table>
-
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-{% endblock %}
-
-{% block js %}
-    <script src="lib/jquery/jquery.min.js"></script>
-
-    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-    <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="lib/jquery.scrollTo.min.js"></script>
-    <script src="lib/jquery.nicescroll.js" type="text/javascript"></script>
-    <script src="lib/jquery.sparkline.js"></script>
-    <!--common script for all pages-->
-    <script src="lib/common-scripts.js"></script>
-    <script type="text/javascript" src="lib/gritter/js/jquery.gritter.js"></script>
-    <script type="text/javascript" src="lib/gritter-conf.js"></script>
-    <!--script for this page-->
-    <script src="lib/sparkline-chart.js"></script>
-    <script src="lib/zabuto_calendar.js"></script>
+    <a href="{{ path('simple_user_new') }}">Create new</a>
 {% endblock %}

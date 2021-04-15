@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <title>Dashio - Bootstrap Admin Template</title>
+
+    <!-- Favicons -->
+    <link href="/img/favicon.png" rel="icon">
+    <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!--external css-->
+    <link href="/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/css/zabuto_calendar.css">
+    <link rel="stylesheet" type="text/css" href="/lib/gritter/css/jquery.gritter.css" />
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+    {{form_start(form,{'attr':{'novalidate' : 'novalidate'}})}}
+    <div class="m-portlet__body">
+
+
+
+
+        <div class="form-group m-form__group row">
+
+            {{ form_label(form.nom, 'nom', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+            <div class="col-10">
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control m-input'}},{'attr':{'novalidate' : 'novalidate'}}) }}
+                {{ form_errors(form.nom) }}
+            </div>
+        </div>
+
+
+        <div class="form-group m-form__group row">
+            {{ form_label(form.prenom, 'prenom', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+            <div class="col-10">
+                {{ form_widget(form.prenom,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
+                {{ form_errors(form.prenom) }}
+            </div>
+        </div>
+
+
+        <div class="form-group m-form__group row">
+
+            {{ form_label(form.cin, 'cin', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+            <div class="col-10">
+                {{ form_widget(form.cin, {'attr': {'class': 'form-control m-input'}},{'attr': {'class': 'form-control m-input'}}) }}
+                {{ form_errors(form.cin) }}
+            </div>
+        </div>
+        <div class="form-group m-form__group row">
+
+            {{ form_label(form.mail, 'mail', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+            <div class="col-10">
+                {{ form_widget(form.mail,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
+                {{ form_errors(form.mail) }}
+            </div>
+        </div>
+
+
+        <div class="form-group m-form__group row">
+
+            {{ form_label(form.mdp, 'mdp', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+            <div class="col-10">
+                {{ form_widget(form.mdp,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
+                {{ form_errors(form.mdp) }}
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+    {{ form_end(form) }}
+{% endblock %}
+
+ {% block js %}
+     <script src="/lib/jquery/jquery.min.js"></script>
+
+     <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+     <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>
+     <script src="/lib/jquery.scrollTo.min.js"></script>
+     <script src="/lib/jquery.nicescroll.js" type="text/javascript"></script>
+     <script src="/lib/jquery.sparkline.js"></script>
+     <!--common script for all pages-->
+     <script src="/lib/common-scripts.js"></script>
+     <script type="text/javascript" src="/lib/gritter/js/jquery.gritter.js"></script>
+     <script type="text/javascript" src="/lib/gritter-conf.js"></script>
+     <!--script for this page-->
+     <script src="/lib/sparkline-chart.js"></script>
+     <script src="/lib/zabuto_calendar.js"></script>
+ {% endblock %}

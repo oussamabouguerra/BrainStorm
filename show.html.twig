@@ -1,0 +1,35 @@
+
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1 align="center">Liste des SimpleUsers</h1>
+    <br><br>
+    <form method="post" action="{{ path('rechercheAdmin') }}">
+        <input type="text" name="searchUser"><input type="submit" value="Rechercher">
+    </form>
+    <br><br>
+    <table bgcolor="#deb887" , border="3", align="center", width="101%">
+        <tr>
+            <th> Nom  </th>
+            <th> Prenom  </th>
+            <th> Email  </th>
+            <th> CIN  </th>
+            <th> Mot de passe  </th>
+            <th> Modifier </th>
+            <th> Supprimer  </th>
+
+        </tr>
+        <tr {% for c in user %}>
+
+            <td>{{ c.nom }}</td>
+            <td>{{ c.prenom }}</td>
+            <td>{{ c.mail }}</td>
+            <td>{{ c.cin }}</td>
+            <td>{{ c.mdp }}</td>
+            <td> <a href={{ path ('pere',{'id' : c.id}) }}> Modifier </a></td>
+            <td> <a href={{ path ('d',{'id' : c.id}) }}> Supprimer </a></td>
+        </tr {% endfor %}>
+    </table>
+
+{% endblock %}
