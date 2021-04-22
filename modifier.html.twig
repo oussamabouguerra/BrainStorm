@@ -29,60 +29,57 @@
 
 
 
-    <div class="form-group m-form__group row">
 
+    <div class="form-group m-form__group row  text-center breadcrumbs_inner">
 
+        {{ form_label(form.PrixTicket , 'PrixTicket', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+        <div class="col-10  text-center breadcrumbs_inner">
+            {{ form_widget(form.PrixTicket, {'attr': {'class': 'form-control m-input'}},{'attr':{'novalidate' : 'novalidate'}}) }}
+            {{ form_errors(form.PrixTicket) }}
+        </div>
     </div>
 
-    <div class="form-group m-form__group row">
-
-        {{ form_label(form.nom, 'nom', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
-        <div class="col-10">
-            {{ form_widget(form.nom, {'attr': {'class': 'form-control m-input'}},{'attr':{'novalidate' : 'novalidate'}}) }}
-            {{ form_errors(form.nom) }}
+    <div class="form-group m-form__group row  text-center breadcrumbs_inner">
+        {{ form_label(form.NbPlace, 'NbPlace', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+        <div class="col-10  text-center breadcrumbs_inner">
+            {{ form_widget(form.NbPlace,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
+            {{ form_errors(form.NbPlace) }}
         </div>
     </div>
 
 
-    <div class="form-group m-form__group row">
-        {{ form_label(form.type, 'type', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
-        <div class="col-10">
-            {{ form_widget(form.type,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
-            {{ form_errors(form.type) }}
+    <div class="form-group m-form__group row  text-center breadcrumbs_inner">
+
+        {{ form_label(form.Salle, 'Salle', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+        <div class="col-10  text-center breadcrumbs_inner">
+            {{ form_widget(form.Salle, {'attr': {'class': 'form-control m-input'}},{'attr': {'class': 'form-control m-input'}}) }}
+            {{ form_errors(form.Salle) }}
+        </div>
+    </div>
+    <div class="form-group m-form__group row  text-center breadcrumbs_inner">
+
+        {{ form_label(form.dateh, 'dateh', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+        <div class="col-10  text-center breadcrumbs_inner">
+            {{ form_widget(form.dateh,{'attr': {'class': 'date_widget'}}, {'attr': {'class': 'date_widget'}}) }}
+            {{ form_errors(form.dateh) }}
         </div>
     </div>
 
 
-    <div class="form-group m-form__group row">
+    <div class="form-group m-form__group row  text-center breadcrumbs_inner">
 
-        {{ form_label(form.pourcentage, 'pourcentage', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
-        <div class="col-10">
-            {{ form_widget(form.pourcentage, {'attr': {'class': 'form-control m-input'}},{'attr': {'class': 'form-control m-input'}}) }}
-            {{ form_errors(form.pourcentage) }}
+        {{ form_label(form.film, 'Film', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+        <div class="col-10  text-center breadcrumbs_inner">
+            {{ form_widget(form.film,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
+            {{ form_errors(form.film) }}
         </div>
     </div>
-    <div class="form-group m-form__group row">
+    <div class="form-group m-form__group row  text-center breadcrumbs_inner">
 
-        {{ form_label(form.description, 'description', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
-        <div class="col-10">
-            {{ form_widget(form.description,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
-            {{ form_errors(form.description) }}
-        </div>
-    </div>
-    <div class="form-group m-form__group row">
-
-        {{ form_label(form.categorie, 'categorie', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
-        <div class="col-10">
-            {{ form_widget(form.categorie,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
-            {{ form_errors(form.categorie) }}
-        </div>
-    </div>
-    <div class="form-group m-form__group row">
-
-        {{ form_label(form.code, 'code', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
-        <div class="col-10">
-            {{ form_widget(form.code,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
-            {{ form_errors(form.code) }}
+        {{ form_label(form.promo, 'Promo', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+        <div class="col-10  text-center breadcrumbs_inner">
+            {{ form_widget(form.promo,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
+            {{ form_errors(form.promo) }}
         </div>
     </div>
 
@@ -90,7 +87,7 @@
     <div class="form-group m-form__group row">
         <div>
             <button type="submit" class="btn" style="background-color: #0e2e42">
-Modifier            </button>
+                Modifier            </button>
 
         </div>
     </div>

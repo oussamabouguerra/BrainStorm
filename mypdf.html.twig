@@ -1,0 +1,96 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des tickets</title>
+</head>
+<body>
+<h1>Liste Ticket</h1>
+<table id="customers">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>PrixTicket</th>
+        <th>NbPlace</th>
+        <th>Salle</th>
+        <th>date</th>
+        <th>promo</th>
+        <th>film</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for U in ticket %}
+        <tr>
+            <td>{{ U.id }}</td>
+            <td>{{ U.PrixTicket }}</td>
+            <td>{{ U.NbPlace}}</td>
+            <td>{{ U.Salle}}</td>
+            <td>{{ U.dateh|date('d-m-Y')}}</td>
+            <td>{{ U.promo }}</td>
+            <td>{{ U.film }}</td>
+
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
+<style>
+    h1{
+        position: center;
+        color : #2A3542;
+    }
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #258692;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    li a:hover:not(.active) {
+        background-color: #111;
+    }
+
+    .active {
+        background-color: #4c6daf;
+    }
+    #customers {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #customers td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+
+    }
+
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+    #customers tr:hover {background-color: #ddd;}
+
+    #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #258692;
+        color: #FFFFFF;
+    }
+
+</style>
