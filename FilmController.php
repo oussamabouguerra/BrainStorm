@@ -4,11 +4,17 @@ namespace App\Controller;
 
 use App\Entity\Film;
 use App\Form\FilmType;
+use App\Form\SearchFilmType;
 use App\Repository\FilmRepository;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\User;
 
 class FilmController extends AbstractController
 {
@@ -32,31 +38,25 @@ class FilmController extends AbstractController
     }
 
     /**
-     * @Route("/Affichefront", name="Affichefront")
-     */
-
-    public function affiche(FilmRepository $filmRepository)
-    {
-        $film = $filmRepository->findAll();
-
-        return $this->render('film/film.html.twig', [
-            'film' => $film,
-        ]);
-
-    }
-    /**
      * @Route("/Afficherback", name="Afficherback")
      */
 
-    public function afficheback(FilmRepository $filmRepository)
+    public function affiche(FilmRepository $filmRepository,Request $request)
     {
-        $film = $filmRepository->findAll();
-
-        return $this->render('back/index.html.twig', [
-            'film' => $film
-        ]);
+        $em=$this->getDoctrine()->getManager();
+        $Films=$em->getRepository(Film::class)->findAll();
+        if($request->isMethod('POST'))
+        {
+            $nom=$request->get('nom');
+            $Films=$em->getRepository(Film::class)->findBy(array('nom'=>$nom));
+        }
+        return $this->render('back/index.html.twig', array('film' => $Films)
+        );
 
     }
+
+
+
     /**
      * @Route("/supprimerfilm/{id}", name="supprimerfilm")
      */
@@ -131,4 +131,78 @@ class FilmController extends AbstractController
         ]);
 
     }
+
+
+    /**
+     * @route ("/Affichefront", name="Affichefront")
+     */
+ public function recherche (Request $request ,Request $request1, PaginatorInterface $paginator){
+        $em=$this->getDoctrine()->getManager();
+        $Films=$em->getRepository(Film::class)->findAll();
+
+$Film = $paginator->paginate(
+
+         $Films,
+         $request->query->getInt('page', 1),
+         // Items per page
+         2
+     );
+        return $this->render('film/film.html.twig',['film'=>$Film]);
+
+ }
+    /**
+     * @Route("/trinom", name="trinom")
+     */
+
+    public function TriN()
+    {
+
+        $Film= $this->getDoctrine()->getRepository(Film::class)->listOrderByD();
+        return $this->render("back/index.html.twig",['film'=>$Film]);
+
+    }
+    /**
+     * @Route("/tricategorie", name="tricategorie")
+     */
+
+    public function TriC()
+    {
+
+        $Film= $this->getDoctrine()->getRepository(Film::class)->listOrderByC();
+        return $this->render("back/index.html.twig",['film'=>$Film]);
+
+    }
+    /**
+     * @Route("/lista", name="film_list")
+     */
+    public function lista()
+    {
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        $repository = $this->getDoctrine()->getrepository(Film::Class);//recuperer repisotory
+        $film = $repository->findAll();//affichage
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('back\lista.html.twig', [
+            'film' => $film,
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("Films.pdf", [
+            "Attachment" => true
+        ]);
+    }
+
+
 }

@@ -279,7 +279,7 @@
                     </ul>
                 </li>
 
-            <!-- sidebar menu end-->
+                <!-- sidebar menu end-->
 
     </aside>
     <!--sidebar end-->
@@ -294,108 +294,91 @@
 
                 <div class="container">
                     <div class="row">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #64c3c2  ; color: white">
-                                Tri
-                            </button>
-
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{ path('trinom') }}">TriParNom</a>
-                                --OR--
-                                <a class="dropdown-item" href="{{ path('tricategorie') }}">TriParCatégorie </a>
-
-                            </div>
-                        </div>
                         <div class="col-sm-12 text-center breadcrumbs_inner">
 
                             <form method="POST" >
                                 <input type="text" name="nom">
-                                <input type="submit" value="Recherche" class="btn" style="background-color: #64c3c2 ; color: white" >
+                                <input type="submit" value="Recherche">
                             </form>
 
                             <table class="table" border="1" style="color:#22242a ;border: #a7a7a7">
-                            <h4><i class="fa fa-angle-right"></i> La liste des films</h4>
-                            <hr>
+                                <h4><i class="fa fa-angle-right"></i> La liste des films</h4>
+                                <hr>
                                 <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Nom</th>
-                                <th> Catégorie</th>
-                                <th>Acteur</th>
-                                <th> Durée </th>
-                                <th>Prix</th>
-                                <th>synopsis</th>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Nom</th>
+                                    <th> Catégorie</th>
+                                    <th>Acteur</th>
+                                    <th> Durée </th>
+                                    <th>Prix</th>
+                                    <th>synopsis</th>
 
-                                <th></th>
-                                <th></th>
-
-
-
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                {% for U in film%}
-                            <tr>
-                                <td style="height: 100px;width: 100px;"><img src="{{ asset('img/' ~ U.image) }}" style="height: 100px;width: 100px;">
-                                </td>
-                                <td>
-                                    {{ U.nom }}
-                                </td>
-
-                                <td>
-                                    {{ U.categorie }}
-                                </td>
-
-                                <td>
-                                    {{ U.actor }}
-                                </td>
-                                <td>
-                                    {{ U.duree }}
-                                </td>
-                                <td>
-                                    {{ U.prix }} Dt
-                                </td>
-                                <td>
-                                    {{ U.synopsis }}
-                                </td>
+                                    <th></th>
+                                    <th></th>
 
 
-                                <td>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr>
+                                    {% for U in film%}
+                                <tr>
+                                    <td style="height: 100px;width: 100px;"><img src="{{ asset('img/' ~ U.image) }}" style="height: 100px;width: 100px;">
+                                    </td>
+                                    <td>
+                                        {{ U.nom }}
+                                    </td>
+
+                                    <td>
+                                        {{ U.categorie }}
+                                    </td>
+
+                                    <td>
+                                        {{ U.actor }}
+                                    </td>
+                                    <td>
+                                        {{ U.duree }}
+                                    </td>
+                                    <td>
+                                        {{ U.prix }} Dt
+                                    </td>
+                                    <td>
+                                        {{ U.synopsis }}
+                                    </td>
 
 
-                                    <a href="{{ path('Modifier',{'id':U.id}) }}">
-                                        <img src="{{ asset('update2.png') }}"  style="width:42px;height:42px;border:0">
-                                    </a>
-
-                                </td>
-                                <td>
+                                    <td>
 
 
-                                    <a href="{{ path('supprimerfilm',{'id':U.id}) }}">
-                                        <img src="{{ asset('delete2.png') }}"  style="width:42px;height:42px;border:0">
-                                    </a>
+                                        <a href="{{ path('Modifier',{'id':U.id}) }}">
+                                            <img src="{{ asset('update2.png') }}"  style="width:42px;height:42px;border:0">
+                                        </a>
 
-                                </td>
-
-
-                            </tr>
-                            {% endfor %}
+                                    </td>
+                                    <td>
 
 
-                            </tbody>
-                        </table>
+                                        <a href="{{ path('supprimerfilm',{'id':U.id}) }}">
+                                            <img src="{{ asset('delete2.png') }}"  style="width:42px;height:42px;border:0">
+                                        </a>
 
-                            <button>
-                                <a href="lista" class="rt-btn rt-gradient pill rt-sm3 text-uppercase rt-mt-10">Imprimer</a>
-                            </button>
+                                    </td>
+
+
+                                </tr>
+                                {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /content-panel -->
                     </div>
-
-                    <!-- /content-panel -->
+                    <!-- /col-md-12 -->
                 </div>
-
-                <!-- /col-md-12 -->
-            </div>
             </div>
             <!-- /row -->
         </section>
