@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Promotion;
 use App\Form\PromotionType;
+use App\Form\SearchPromotionType;
 use App\Repository\PromotionRepository;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,11 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class PromotionController extends AbstractController
 {
     /**
-     * @Route("/promotion", name="promotion")
+     * @Route("/home", name="home")
      */
     public function index(): Response
     {
-        return $this->render('promotion/home.html.twig', [
+        return $this->render('front/home.html.twig', [
             'controller_name' => 'PromotionController',
         ]);
     }
@@ -27,30 +30,36 @@ class PromotionController extends AbstractController
      */
     public function afficher(PromotionRepository $promotionRep ,Request $request)
     {
-
         $promotion = $promotionRep->findAll();
-
+        $form= $this->createForm(SearchPromotionType::class);
+        $search = $form->handleRequest($request);
+        if($form->isSubmitted()&&$form->isValid()){
+            $promotion= $promotionRep->search(
+                $search->get('mots')->getData(),
+                $search->get('categorie')->getData()
+            );
+        }
         return $this->render('promotion/index.html.twig', [
-            'promotion' => $promotion
-        ]);
+            'promotion' => $promotion,
+            'form'=>$form->createView()
 
+        ]);
     }
+
+
     /**
-     * @Route("/Affichefront", name="Affichefront")
+     * @Route("/AffichefrontPromotion", name="AffichefrontPromotion")
      */
     public function afficherf(PromotionRepository $promotionRep ,Request $request)
     {
 
         $promotion = $promotionRep->findAll();
 
-        return $this->render('promotion/afficher.html.twig', [
+        return $this->render('front/affichepromotion.html.twig', [
             'promotion' => $promotion
         ]);
 
     }
-
-
-
 
 
     /**
@@ -79,7 +88,7 @@ class PromotionController extends AbstractController
 
     }
     /**
-     * @route ("service/modifier/{id}", name="u")
+     * @route ("/modifierpromo/{id}", name="a")
      */
     function modifier(PromotionRepository $repository,Request $request,$id)
     {
@@ -101,7 +110,7 @@ class PromotionController extends AbstractController
 
 
     /**
-     * @Route("/d/{id}", name="d")
+     * @Route("/d/{id}", name="c")
      */
     public function supprimer ($id)
     {
@@ -111,6 +120,61 @@ class PromotionController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('AfficheP');
 
+
+    }
+
+    /**
+     * @route ("/mypdfPromotion", name="mypdfPromotion")
+     */
+    public function imprimerpdf()
+    {
+        $promotion=$this->getDoctrine()->getRepository(Promotion::class)->findAll();
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('promotion/mypdf.html.twig', [
+            'promotion' => $promotion
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => true
+        ]);
+    }
+
+    /**
+     * @Route("/tritype", name="tritype")
+     */
+
+    public function TriT(PromotionRepository $promotionRep)
+    {        $promotion=$promotionRep->findAll();
+
+        $promotion= $this->getDoctrine()->getRepository(Promotion::class)->listOrderByType();
+        return $this->render("promotion/TriType.html.twig",['promotion'=>$promotion]);
+
+    }
+    /**
+     * @Route("/trinom", name="trinom")
+     */
+
+    public function TriN(PromotionRepository $promotionRep)
+    {        $promotion=$promotionRep->findAll();
+
+        $promotion= $this->getDoctrine()->getRepository(Promotion::class)->listOrderByNom();
+        return $this->render("promotion/TriNom.html.twig",['promotion'=>$promotion]);
 
     }
 }

@@ -134,7 +134,7 @@ class FilmController extends AbstractController
 
 
     /**
-     * @route ("/Affichefront", name="Affichefront")
+     * @route ("/AffichefrontFilm", name="AffichefrontFilm")
      */
  public function recherche (Request $request ,Request $request1, PaginatorInterface $paginator){
         $em=$this->getDoctrine()->getManager();
@@ -151,7 +151,7 @@ $Film = $paginator->paginate(
 
  }
     /**
-     * @Route("/trinom", name="trinom")
+     * @Route("/trinomfilm", name="trinomfilm")
      */
 
     public function TriN()

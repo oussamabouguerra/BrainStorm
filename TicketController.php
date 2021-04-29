@@ -84,7 +84,7 @@ class TicketController extends AbstractController
 
     }
     /**
-     * @Route("/Affichefront", name="Affichefront")
+     * @Route("/AffichefrontTicket", name="AffichefrontTicket")
      */
     public function afficherfront(TicketRepository $ticketRep ,Request $request,PaginatorInterface $paginator)
     {
@@ -188,7 +188,7 @@ public function calc($PrixTicket,$Promo)
 
     }
     /**
-     * @route ("/mypdf", name="pdf")
+     * @route ("/mypdfTicket", name="mypdfTicket")
      */
     public function imprimerpdf()
     {
