@@ -33,6 +33,17 @@ class TicketController extends AbstractController
         ]);
     }
     /**
+     * @Route("/roulette", name="roulette")
+     */
+
+    public function roulette(): Response
+    {
+
+        return $this->render('ticket/roulette.html.twig', [
+            'controller_name' => 'TicketController',
+        ]);
+    }
+    /**
      * @Route("/AfficheT", name="AfficheT")
      */
     public function afficherback(TicketRepository  $ticketRep ,Request $request)

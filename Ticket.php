@@ -6,9 +6,11 @@ use App\Repository\TicketRepository;
 use  Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Promotion;
-
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use App\Form\SearchTicketType;
 /**
  * @ORM\Entity(repositoryClass=TicketRepository::class)
+ *  @ORM\Table(name="ticket",indexes={@ORM\Index(columns={"prix_ticket","salle"},flags={"fulltext"})})
  */
 class Ticket
 {
@@ -28,6 +30,7 @@ class Ticket
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Ce champs est obligatoire")
+     *
      */
     private $NbPlace;
 
