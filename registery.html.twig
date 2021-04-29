@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <title>CineJamil - Create new account</title>
+
+    <!-- Favicons -->
+    <link href="img/favicon.png" rel="icon">
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Bootstrap core CSS -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!--external css-->
+    <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet">
+
+    <!-- =======================================================
+      Template Name: Dashio
+      Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
+      Author: TemplateMag.com
+      License: https://templatemag.com/license/
+    ======================================================= -->
+</head>
+
+<body>
+<!-- **********************************************************************************************************************************************************
+    MAIN CONTENT
+    *********************************************************************************************************************************************************** -->
+
+
+<div id="login-page">
+    <div class="container">
+            <br><br><br><br><br><br><br>
+            <h1 class="form-login-heading" align="center" style="color: #1ca59e">Create new account</h1>
+            <div class="login-wrap">
+                {{form_start(form,{'attr':{'novalidate' : 'novalidate'}})}}
+                <div class="m-portlet__body">
+                    <div class="form-group m-form__group row">
+                        {{ form_label(form.nom, 'nom', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                        <div class="col-10">
+                            {{ form_widget(form.nom, {'attr': {'class': 'form-control m-input'}},{'attr':{'novalidate' : 'novalidate'}}) }}
+                            {{ form_errors(form.nom) }}
+                        </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                        {{ form_label(form.prenom, 'prenom', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                        <div class="col-10">
+                            {{ form_widget(form.prenom,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
+                            {{ form_errors(form.prenom) }}
+                        </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                        {{ form_label(form.cin, 'cin', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                        <div class="col-10">
+                            {{ form_widget(form.cin, {'attr': {'class': 'form-control m-input'}},{'attr': {'class': 'form-control m-input'}}) }}
+                            {{ form_errors(form.cin) }}
+                        </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                        {{ form_label(form.mail, 'mail', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                        <div class="col-10">
+                            {{ form_widget(form.mail,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
+                            {{ form_errors(form.mail) }}
+                        </div>
+                    </div>
+                    <div class="form-group m-form__group row">
+                        {{ form_label(form.mdp, 'mdp', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                        <div class="col-10">
+                            {{ form_widget(form.mdp,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
+                            {{ form_errors(form.mdp) }}
+                        </div>
+                    </div>
+                </div>
+                {{ form_end(form) }}{{ form(form) }}
+            </div>
+
+            <!-- modal -->
+
+    </div>
+</div>
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="lib/jquery/jquery.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<!--BACKSTRETCH-->
+<!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+<script type="text/javascript" src="lib/jquery.backstretch.min.js"></script>
+<script>
+    $.backstretch("img/login-bg.jpg", {
+        speed: 500
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+<h1 align="center">Liste des Réservations</h1>
+    <table bgcolor="#deb887" , border="3", align="center", width="95%">
+        <tr>
+            <th> idUser  </th>
+            <th> Prix  </th>
+            <th> Date </th>
+            <th> Salle </th>
+        </tr>
+        <tr {% for c in user %}>
+            <td>{{ c.idUser }}</td>
+            <td>{{ c.prix }}</td>
+            <td>{{ c.date }}</td>
+            <td>{{ c.heure }}</td>
+        </tr {% endfor %}>
+    </table>
+

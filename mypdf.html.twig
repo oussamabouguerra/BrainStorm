@@ -1,35 +1,34 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Liste des promotions</title>
+    <title>Liste des tickets</title>
 </head>
 <body>
-<h1>La liste des promotions</h1>
-
+<h1>Liste Ticket</h1>
 <table id="customers">
     <thead>
     <tr>
         <th>Id</th>
-        <th>Nom</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Pourcentage</th>
-        <th>Code</th>
-        <th>Catégorie</th>
+        <th>PrixTicket</th>
+        <th>NbPlace</th>
+        <th>Salle</th>
+        <th>date</th>
+        <th>promo</th>
+        <th>film</th>
 
 
     </tr>
     </thead>
     <tbody>
-    {% for U in promotion %}
+    {% for U in ticket %}
         <tr>
             <td>{{ U.id }}</td>
-            <td>{{ U.nom }}</td>
-            <td>{{ U.type}}</td>
-            <td>{{ U.description}}</td>
-            <td>{{ U.pourcentage}}</td>
-            <td>{{ U.code }}</td>
-            <td>{{ U.cat.categorie }}</td>
+            <td>{{ U.PrixTicket }}</td>
+            <td>{{ U.NbPlace}}</td>
+            <td>{{ U.Salle}}</td>
+            <td>{{ U.dateh|date('d-m-Y')}}</td>
+            <td>{{ U.promo.pourcentage }}</td>
+            <td>{{ U.film.nom }}</td>
 
 
         </tr>
@@ -38,19 +37,10 @@
 </table>
 </body>
 </html>
-<div class="icon-container">
-    <a href="index.html.twig">
-        <i class="far fa-arrow-alt-circle-left"></i>
-        Back
-
-    </a>
-</div>
-
-<br><br>
 <style>
     h1{
         position: center;
-        color : #258692;
+        color : #2A3542;
     }
     ul {
         list-style-type: none;

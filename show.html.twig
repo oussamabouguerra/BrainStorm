@@ -8,6 +8,15 @@
     <form method="post" action="{{ path('rechercheAdmin') }}">
         <input type="text" name="searchUser"><input type="submit" value="Rechercher">
     </form>
+    <form method="post" action="{{ path('triSU') }}" align="center">
+        <label>
+            <select name="tri">
+                <option value="Nom">Nom</option>
+                <option value="Prenom">Prenom</option>
+            </select>
+        </label>
+        <input type="submit" class="btn btn-primary btn-bottom" value="Trier" />
+    </form>
     <br><br>
     <table bgcolor="#deb887" , border="3", align="center", width="101%">
         <tr>
@@ -16,20 +25,53 @@
             <th> Email  </th>
             <th> CIN  </th>
             <th> Mot de passe  </th>
+            <th> Bloquage  </th>
             <th> Modifier </th>
             <th> Supprimer  </th>
-
+            <th> Bloquer  </th>
+            <th> Débloquer  </th>
         </tr>
         <tr {% for c in user %}>
-
             <td>{{ c.nom }}</td>
             <td>{{ c.prenom }}</td>
             <td>{{ c.mail }}</td>
             <td>{{ c.cin }}</td>
             <td>{{ c.mdp }}</td>
+            <td>{{ c.block }}</td>
             <td> <a href={{ path ('pere',{'id' : c.id}) }}> Modifier </a></td>
             <td> <a href={{ path ('d',{'id' : c.id}) }}> Supprimer </a></td>
+            <td> <a href={{ path ('Bloquer',{'id' : c.id}) }}> Bloquer </a></td>
+            <td> <a href={{ path ('DBloquer',{'id' : c.id}) }}> Débloquer </a></td>
         </tr {% endfor %}>
     </table>
 
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous">
+    <br>
+    <div class="container">
+        <h1 align="Center">Statistiques</h1>
+        <br>
+        <h1>Users bloqués :</h1>
+        <canvas id="parent" width="400" height="100"></canvas>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+    <script>
+        let parent = document.querySelector("#parent")
+        let categGraph = new Chart(parent, {
+            type: "pie",
+            data: {
+                labels: {{ identifiant|raw }},
+                datasets: [{
+
+                    label: "Nombre de Users bloqués",
+                    data: {{ countUser|raw }} ,
+                    backgroundColor: {{ parentColor | raw }},
+                } ,
+
+                ]
+            },
+
+        }) </script>
 {% endblock %}
