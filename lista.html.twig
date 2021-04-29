@@ -1,0 +1,103 @@
+<ul>
+    <li><a class="active" href="#home">Home</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about">About</a></li>
+</ul>
+<h1 >Liste des films</h1>
+<table id="customers">
+    <thead>
+    <tr>
+
+        <th>Nom</th>
+        <th>Categorie</th>
+        <th>Acteur</th>
+        <th>Duree</th>
+        <th>Prix</th>
+        <th>Synopsis</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+
+
+    {% for film in film %}
+        <tr>
+            </td>
+            <td>{{film.nom}}</td>
+            <td>{{film.categorie}}</td>
+            <td>{{film.actor}}</td>
+            <td>{{film.duree}}</td>
+            <td>{{film.prix}}</td>
+            <td>{{film.synopsis}}</td>
+
+
+
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
+<br><br>
+
+<style>
+    h1{
+        position: center;
+        color : #4cae4c;
+    }
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #00c5de;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    li a:hover:not(.active) {
+        background-color: #111;
+    }
+
+    .active {
+        background-color: #4c6daf;
+    }
+    #customers {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #customers td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+
+    }
+
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+    #customers tr:hover {background-color: #ddd;}
+
+    #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #258692;
+        color: #FFFFFF;
+    }
+
+</style>

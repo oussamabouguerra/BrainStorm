@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=FilmRepository::class)
+ * @ORM\Table(name="film",indexes={@ORM\Index(columns={"nom","categorie"},flags={"fulltext"})})
  */
 class Film
 {
