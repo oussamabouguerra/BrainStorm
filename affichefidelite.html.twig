@@ -1,0 +1,68 @@
+
+{% extends 'baseFront.html.twig' %}
+
+{% block body %}
+    <section class="dark-wrapper opaqued parallax" data-parallax="scroll" data-image-src="assets/img/bg/bg2.jpg" data-speed="0.7">
+        <div class="section-inner pad-top-200">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 mt30 wow text-center">
+                        <h2 class="section-heading">Fidelité</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="section-inner">
+            <div class="container">
+                <div class="row">
+
+
+                    <div class="col-sm-4 wow fadeIn" data-wow-delay="0.2s">
+                        <div class="icon-box-1 match-height mb30">
+                            <i class="fa-4x pe-7s-users"></i>
+                            <div class="content-area">
+                                <h3 class="title">Vos points de fidelités</h3>
+                                <table class="table m-table m-table--head-bg-success">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            id user
+                                        </th>
+                                        <th>
+                                            nombre de points de fidelité
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+
+                                    {% for U in fidelite%}
+                                    <tr>
+                                        <td>
+
+                                            {{ U.usr.nom }}
+                                        </td>
+                                        <td>
+                                            {{ U.nbr }}
+                                        </td>
+
+
+                                        {% endfor %}
+
+                                    </tr>
+                                </table>
+                                <div class="text-center breadcrumbs_inner">
+                                    {{ knp_pagination_render(fidelite) }}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
